@@ -8,6 +8,7 @@ A notebook to run latest stable diffusion webui on Sagemaker Studio Lab, good al
   - Its full of wall-block-of-code but hey... i can help you with that. Shoot DM on my [Pixiv](https://pixiv.me/x1101_id) or my Discord : x1101_id.
 
 ## How to Start
-  1. open **sd-webui-sagemaker.ipynb** > Open Studio Lab > Start GPU runtime > copy to project> copy Notebook Only 
+  1. Get sagemake account by requesting through [this](https://studiolab.sagemaker.aws/requestAccount) link. just fill the form and wait for 1-5 days.
+  2. Open **sd-webui-sagemaker.ipynb** > Open Studio Lab > Start GPU runtime > copy to project> copy Notebook Only 
  
 
