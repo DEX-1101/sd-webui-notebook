@@ -2,7 +2,7 @@
 A notebook to run latest stable diffusion webui on Sagemaker Studio Lab, good alternative with 4 hour free of GPU per day. 
 
 ## Features
-  - Batch download model, lora, vae, embedding, extension from Pastebin link, support donwload from huggingface's private repo also.
+  - Batch download model, lora, vae, embedding, extension from Pastebin link/local storage, support donwload from huggingface's private repo also.
   - Pre-installed negative embedding and some popular extension.
   - Update webui repo and all its extension to the latest with just 1-click.
   - Its full of wall-block-of-code but hey... i can help you with that. Shoot DM on my [Pixiv](https://pixiv.me/x1101_id) or my Discord : x1101_id.
