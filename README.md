@@ -13,5 +13,7 @@ A notebook to run latest stable diffusion webui on Sagemaker Studio Lab, good al
 
  ![ui](https://github.com/DEX-1101/sd-webui-sagemaker/blob/a56066a75ac6a18419ed53072bb262c2a8048bb5/ui.png)
 
+ ![markdown](https://github.com/DEX-1101/sd-webui-sagemaker/blob/main/markdown.png)
+
 
 
