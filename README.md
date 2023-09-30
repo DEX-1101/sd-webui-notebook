@@ -1,5 +1,5 @@
-# Stable Diffusion Webui for Sagemaker 
-A notebook to run latest stable diffusion webui on Sagemaker Studio Lab, good alternative with 4 hour free of GPU per day. 
+# Stable Diffusion Webui for Sagemaker Studio Lab
+An easy friendly notebook to run latest stable diffusion webui on Sagemaker Studio Lab with 4 hour free of GPU per day. 
 
 ## Features
   - Batch download model, lora, vae, embedding, extension from Pastebin link/local storage, support download from huggingface's private repo also.
