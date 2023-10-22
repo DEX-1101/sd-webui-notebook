@@ -1,5 +1,5 @@
 # Stable Diffusion Webui for Sagemaker Studio Lab
-###PS : Always run the FIRST CELL to fix the current issue.
+### PS : Always run the FIRST CELL to fix the current issue.
 An easy friendly notebook to run latest stable diffusion webui on Sagemaker Studio Lab with 4 hour free of GPU per day. 
 
 ## Features
