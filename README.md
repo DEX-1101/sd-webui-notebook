@@ -7,7 +7,7 @@
   
 
  
-![markdown](https://github.com/DEX-1101/sd-webui-sagemaker/blob/main/markdown.png)
+![markdown](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_27.png)
  
 
 
