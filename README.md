@@ -1,13 +1,15 @@
 ## My Notebook Collection
 
 ## Notes
-  - <b>kaggle-colab-notebook.ipynnb</b> works wor colab also, just uncomment the #Colab section
-  - 
+  - <b>kaggle-colab-notebook.ipynnb</b> works for colab also, just uncomment the #Colab section.
+  - notebook can generate nsfw on kaggle but use at your OWN RISK.
+  - i will keep update the notebook as long i still playing stable-diffusion.
+  - feel free to open an issue or contact me if you have question/problem.
   
 
  
 ![markdown](https://github.com/DEX-1101/sd-webui-sagemaker/blob/main/markdown.png)
  
-![ui](https://github.com/DEX-1101/sd-webui-sagemaker/blob/a56066a75ac6a18419ed53072bb262c2a8048bb5/ui.png)
+
 
 
