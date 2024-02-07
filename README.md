@@ -3,7 +3,6 @@
 ## Notes
   - <b>kaggle-colab-notebook.ipynnb</b> works for colab also, just uncomment the #Colab section.
   - notebook can generate nsfw on kaggle but use at your OWN RISK.
-  - i will keep update the notebook as long i still playing stable-diffusion.
   - feel free to open an issue or contact me if you have question/problem.
   
 
