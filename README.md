@@ -1,12 +1,8 @@
-# Stable Diffusion Webui for Sagemaker Studio Lab
+## My Notebook Collection
 
-## Features
-  - Batch download model, lora, vae, embedding, extension from Pastebin link/local storage, support download from huggingface's private repo also.
-  - Pre-installed Negative embedding and some popular extension. (ControlNet, CivitAi, EasyNeg, Batchlinks and more.)
-  - Update webui repo and all its extension to the latest with just 1-click.
-  - Its full of wall-block-of-code but hey... i can help you with that. Shoot DM on my [Pixiv](https://pixiv.me/x1101_id) or my Discord : x1101_id.
-
-## How to Start
+## Notes
+  - <b>kaggle-colab-notebook.ipynnb</b> works wor colab also, just uncomment the #Colab section
+  - 
   
 
  
