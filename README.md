@@ -1,7 +1,7 @@
 ## My Notebook Collection
 
 ## Notes
-  - <b>kaggle-colab-notebook.ipynnb</b> works for colab(pro) also, just uncomment the #Colab section.
+  - <b>kaggle-colab-notebook.ipynnb</b> works for colab(pro) also, just uncomment the #Colab section and change the <b>root_path</b> to <b>/content.</b>
   - notebook can generate nsfw on kaggle but use at your OWN RISK.
   - feel free to open an issue or contact me if you have question/problem.
   
