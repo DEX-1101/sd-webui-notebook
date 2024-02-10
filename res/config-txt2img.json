@@ -1,12 +1,12 @@
 {
     "None": {},
-    "SDXL /  832 x 1216 / 13:19 / Portrait": {
+    "SDXL | 832 x 1216 | 13:19 Portrait": {
         "txt2img_sampling": "Euler a",
         "txt2img_steps": 40,
         "txt2img_width": 832,
         "txt2img_height": 1216,
         "txt2img_batch_count": 1,
-        "txt2img_batch_size": 8,
+        "txt2img_batch_size": 1,
         "txt2img_hr-checkbox": true,
         "txt2img_hr_scale": 1.3,
         "txt2img_hr_upscaler": "Latent",
@@ -16,13 +16,13 @@
         "txt2img_enable-checkbox": false,
         "txt2img_switch_at": 0.8
     },
-    "SDXL / 768 x 1344 / 4:7 / Portrait": {
+    "SDXL | 768 x 1344 | 4:7 Portrait": {
         "txt2img_sampling": "Euler a",
         "txt2img_steps": 40,
         "txt2img_width": 768,
         "txt2img_height": 1344,
         "txt2img_batch_count": 1,
-        "txt2img_batch_size": 8,
+        "txt2img_batch_size": 1,
         "txt2img_hr-checkbox": true,
         "txt2img_hr_scale": 1.3,
         "txt2img_hr_upscaler": "Latent",
