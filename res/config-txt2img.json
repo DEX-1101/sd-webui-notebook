@@ -14,7 +14,6 @@
         "txt2img_denoising_strength": 0.55,
         "txt2img_cfg_scale": 7,
     },
-    
     "SDXL Default | 1024 x 1024 | 1:1 Square": {
         "txt2img_sampling": "Euler a",
         "txt2img_steps": 40,
