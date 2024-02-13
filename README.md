@@ -1,7 +1,7 @@
 ## My Notebook Collection
 
 ## Notes
-  - Change **root_path** to ***/content*** if you're planning using Colab(pro).
+  - Set **is_colab** to ***True*** if you're planning using Colab(pro).
   - **Man of Culture**, use at your OWN RISK.
   - Feel free to open an issue or contact me if you have question/problem.
 ## How to register zrok tunnel
