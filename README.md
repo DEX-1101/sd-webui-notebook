@@ -9,6 +9,7 @@
 
  
 ![markdown](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_27.png)
+![colab](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_705.png)
  
 
 
