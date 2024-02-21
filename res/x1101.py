@@ -13,7 +13,6 @@ else:
      print('error')
     
 branch = "master"
-ui = ""
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
