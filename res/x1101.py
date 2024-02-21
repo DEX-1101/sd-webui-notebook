@@ -13,7 +13,7 @@ elif 'studio-lab-user' in os.listdir('/'):
     ui = "/home/studio-lab-user"
     env = 'Sagemaker Studio Lab'
 else:
-     print('Error. Enviroment not detected')
+     cprint('Error. Enviroment not detected', color="flat_red")
     
 branch = "master"
 ui_path = os.path.join(ui, "x1101")
