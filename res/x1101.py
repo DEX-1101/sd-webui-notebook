@@ -5,15 +5,15 @@ from colablib.colored_print import cprint, print_line
 
 if 'content' in os.listdir('/'):
     ui = "/content"
-    env = 'Colab'
+    env = ' for Colab'
 elif 'kaggle' in os.listdir('/'):
     ui = "/kaggle/working"
-    env = 'Kaggle'
+    env = 'for Kaggle'
 elif 'studio-lab-user' in os.listdir('/'):
     ui = "/home/studio-lab-user"
-    env = 'Sagemaker Studio Lab'
+    env = 'for Sagemaker Studio Lab'
 else:
-     print('error')
+     print('Error. Enviroment not detected')
     
 branch = "master"
 ui_path = os.path.join(ui, "x1101")
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         agus.append(("pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118", "Installing torch..."))
         agus.append(("pip install xformers==0.0.20 triton==2.0.0", "Installing xformers..."))    
     else:
-        cprint("Error. Enviroment not detected !")
+        agus.append((""))
             
     si_kontol = 0
     kntl = 0
