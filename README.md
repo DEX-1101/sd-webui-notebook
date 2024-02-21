@@ -1,7 +1,7 @@
 ## My Notebook Collection
 
 ## Notes
-  - Set **is_colab** to ***True*** if you're planning using Colab(pro).
+  - Notebook works on both Colab(pro) and Kaggle.
   - **Man of Culture**, use at your OWN RISK.
   - Feel free to open an issue or contact me if you have question/problem.
 ## How to register zrok tunnel
