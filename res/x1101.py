@@ -44,13 +44,16 @@ if __name__ == "__main__":
     agus = []
     
     if 'content' in os.listdir('/'):
+        ui = "/content"
         env = 'Colab'
         agus.append(("pip install -q xformers==0.0.22.post7", "Installing xformers..."))
     elif 'kaggle' in os.listdir('/'):
+        ui = "/kaggle/working"
         env = 'Kaggle'
         agus.append(("pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118", "Installing torch..."))
         agus.append(("pip install -q xformers==0.0.20 triton==2.0.0", "Installing xformers..."))
     elif 'studio-lab-user' in os.listdir('/'):
+        ui = "/home/studio-lab-user/content"
         env = 'Sagemaker Studio Lab'
         agus.append(("conda install -q -y aria2", "aria2"))
         agus.append(("conda install -q -y glib"))
