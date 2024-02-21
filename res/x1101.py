@@ -23,11 +23,8 @@ def kontolondon(oppai, asu, si_kontol, kntl, debug=True):
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
     try:
-        if debug:
-            subprocess.run(oppai, check=True, shell=True, text=True)  
-        else:
-            subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        
+        subprocess.run(oppai, check=True, shell=True, text=True)  
+        #subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         si_kontol += 1
     except subprocess.CalledProcessError as e:
         print(f"Error at [{asu}]: {e}")
