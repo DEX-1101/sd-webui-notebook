@@ -24,12 +24,12 @@ def kontolondon(oppai, asu, si_kontol, kntl):
     cprint(f"    > {asu}", color="flat_cyan")
     if debug:
         try:
-        subprocess.run(oppai, check=True, shell=True, text=True)
-        si_kontol += 1   
+            subprocess.run(oppai, check=True, shell=True, text=True)
+            si_kontol += 1   
     else:
         try
-        subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        si_kontol += 1
+            subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            si_kontol += 1
     except subprocess.CalledProcessError as e:
         print(f"Error at [{asu}]: {e}")
         kntl += 1
