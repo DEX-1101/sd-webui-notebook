@@ -19,7 +19,7 @@ branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-def kontolondon(oppai, asu, si_kontol, kntl):   
+def kontolondon(oppai, asu, si_kontol, kntl debug=False):   
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
     try:
@@ -27,7 +27,8 @@ def kontolondon(oppai, asu, si_kontol, kntl):
             subprocess.run(oppai, check=True, shell=True, text=True)  
         else:
             subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            si_kontol += 1
+        
+        si_kontol += 1
     except subprocess.CalledProcessError as e:
         print(f"Error at [{asu}]: {e}")
         kntl += 1
