@@ -3,20 +3,22 @@ import subprocess
 import time
 from colablib.colored_print import cprint, print_line
 
+if 'content' in os.listdir('/'):
+    ui = "/content"
+    env = 'Colab'
+elif 'kaggle' in os.listdir('/'):
+    ui = "/kaggle/working"
+    env = 'Kaggle'
+else:
+     print('error')
+    
 branch = "master"
 ui = ""
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
 def kontolondon(oppai, asu, si_kontol, kntl):
-    if 'content' in os.listdir('/'):
-        ui = "/content"
-        env = 'Colab'
-    elif 'kaggle' in os.listdir('/'):
-        ui = "/kaggle/working"
-        env = 'Kaggle'
-    else:
-        print('error')
+   
         
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
