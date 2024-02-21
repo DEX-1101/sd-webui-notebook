@@ -2,6 +2,7 @@ import os
 import subprocess
 import time
 from colablib.colored_print import cprint, print_line
+from colorama import init, Fore, Back, Style
 
 if 'content' in os.listdir('/'):
     ui = "/content"
@@ -61,11 +62,11 @@ if __name__ == "__main__":
         agus.append(("pip install xformers==0.0.20 triton==2.0.0", "Installing xformers..."))
     elif 'studio-lab-user' in os.listdir('/'):
         agus.append(("conda install -y aria2", "aria2"))
-        agus.append(("conda install -y glib"))
+        agus.append(("conda install -y glib", "glib"))
         agus.append(("pip install opencv-python-headless huggingface-hub", "opencv-python-headless huggingface-hub"))
         agus.append(("pip install --upgrade torchsde", "torchsde"))
         agus.append(("pip install psutil", "psutil"))
-        agus.append(("pip install pytz"))
+        agus.append(("pip install pytz", "pytz"))
         
         agus.append(("conda update -n base conda", "Updating Conda..."))
         agus.append(("pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118", "Installing torch..."))
@@ -77,7 +78,7 @@ if __name__ == "__main__":
     kntl = 0
     total_time = 0
     
-    cprint(f"[+] Installing Requirments [{env}]", color="flat_yellow")
+    cprint(f"[+] Installing " + Fore.GREEN + env + Style.RESET_ALL + " Requirments", color="flat_yellow")
     for oppai, asu in rudi + yanto + agus:
         si_kontol, kntl, command_time = kontolondon(oppai, asu, si_kontol, kntl)
         total_time += command_time
