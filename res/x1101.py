@@ -2,17 +2,16 @@ import os
 import subprocess
 import time
 from colablib.colored_print import cprint, print_line
-from colorama import init, Fore, Back, Style
 
 if 'content' in os.listdir('/'):
     ui = "/content"
-    env = 'for Colab'
+    env = 'Colab'
 elif 'kaggle' in os.listdir('/'):
     ui = "/kaggle/working"
-    env = 'for Kaggle'
+    env = 'Kaggle'
 elif 'studio-lab-user' in os.listdir('/'):
     ui = "/home/studio-lab-user"
-    env = 'for Sagemaker Studio Lab'
+    env = 'Sagemaker Studio Lab'
 else:
      print('Error. Enviroment not detected')
     
@@ -78,7 +77,7 @@ if __name__ == "__main__":
     kntl = 0
     total_time = 0
     
-    cprint(f"[+] Installing " + Fore.GREEN + env + Style.RESET_ALL + " Requirments", color="flat_yellow")
+    cprint(f"[+] Installing [{env}] Requirments", color="flat_yellow")
     for oppai, asu in rudi + yanto + agus:
         si_kontol, kntl, command_time = kontolondon(oppai, asu, si_kontol, kntl)
         total_time += command_time
