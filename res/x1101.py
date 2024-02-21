@@ -4,7 +4,7 @@ import time
 from colablib.colored_print import cprint, print_line
 
 branch = "master"
-root_path = "/kaggle/working"
+ui = ""
 ui_path = os.path.join(root_path, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
