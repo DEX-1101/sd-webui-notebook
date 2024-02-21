@@ -5,7 +5,7 @@ from colablib.colored_print import cprint, print_line
 
 branch = "master"
 ui = ""
-ui_path = os.path.join(root_path, "x1101")
+ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
 def kontolondon(oppai, asu, si_kontol, kntl):
