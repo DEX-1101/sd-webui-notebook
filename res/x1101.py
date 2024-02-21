@@ -9,7 +9,7 @@ if 'content' in os.listdir('/'):
 elif 'kaggle' in os.listdir('/'):
     ui = "/kaggle/working"
     env = 'Kaggle'
-elif 'studio-lab-user' in os.listdir('/'):
+elif 'home' in os.listdir('/'):
     ui = "/home/studio-lab-user"
     env = 'Sagemaker Studio Lab'
 else:
