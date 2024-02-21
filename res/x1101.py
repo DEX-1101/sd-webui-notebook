@@ -19,7 +19,7 @@ branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-def kontolondon(oppai, asu, si_kontol, kntl debug=False):   
+def kontolondon(oppai, asu, si_kontol, kntl, debug=False):   
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
     try:
