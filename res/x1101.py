@@ -19,7 +19,7 @@ branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-def kontolondon(oppai, asu, si_kontol, kntl, debug=False):   
+def kontolondon(oppai, asu, si_kontol, kntl, debug=True):   
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
     try:
@@ -75,15 +75,6 @@ if __name__ == "__main__":
         agus.append(("pip install xformers==0.0.20 triton==2.0.0", "Installing xformers..."))    
     else:
         cprint("Error. Enviroment not detected !")
-    
-    
-    #if ui == "/content":
-    #    env = "Colab"      
-    #    agus.append(("pip install -q xformers==0.0.22.post7", "Installing xformers..."))
-    #else:
-    #    env = "Kaggle"
-    #    agus.append(("pip install -q torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118", "Installing torch..."))
-    #    agus.append(("pip install -q xformers==0.0.20 triton==2.0.0", "Installing xformers..."))
             
     si_kontol = 0
     kntl = 0
