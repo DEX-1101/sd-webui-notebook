@@ -5,7 +5,7 @@ from colablib.colored_print import cprint, print_line
 
 if 'content' in os.listdir('/'):
     ui = "/content"
-    env = ' for Colab'
+    env = 'for Colab'
 elif 'kaggle' in os.listdir('/'):
     ui = "/kaggle/working"
     env = 'for Kaggle'
