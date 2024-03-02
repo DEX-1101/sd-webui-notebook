@@ -44,7 +44,7 @@ if __name__ == "__main__":
     yanto = [
         (f"wget https://raw.githubusercontent.com/DEX-1101/SecretNAI/main/template.txt -O {ui}/download_list.txt", "download_list.txt"),
         (f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/ui.tar.lz4 -o ui.tar.lz4 && tar -xI lz4 -f ui.tar.lz4 && mv {ui}/kaggle/working/x1101 {ui} && rm {ui}/ui.tar.lz4 && rm -rf {ui}/kaggle", "Installing UI..."),
-        (f"cd {ui_path} && git pull && git switch {branch} && git pull && git reset --hard", "Updating UI..."),
+        (f"cd {ui_path} && git pull && git reset --hard && git switch {branch} && git pull && git reset --hard", "Updating UI..."),
         (f"find {git_path} -mindepth 1 -maxdepth 1 -type d -print -exec git -C {{}} reset --hard \;", "Updating Extensions...")
         
     ]
