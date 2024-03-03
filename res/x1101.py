@@ -54,8 +54,8 @@ if __name__ == "__main__":
     if 'content' in os.listdir('/'):
         agus.append(("pip install xformers==0.0.22.post7", "Installing xformers..."))
     elif 'kaggle' in os.listdir('/'):
-        agus.append(("pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 torchtext==0.15.2 torchdata==0.6.1 --extra-index-url https://download.pytorch.org/whl/cu118", "Installing torch..."))
-        agus.append(("pip install xformers==0.0.20 triton==2.0.0", "Installing xformers..."))
+        agus.append(("pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2", "Installing torch..."))
+        agus.append(("pip install xformers==0.0.23.post1", "Installing xformers..."))
     else:
         agus.append((""))
             
