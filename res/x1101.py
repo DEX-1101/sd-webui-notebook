@@ -52,10 +52,10 @@ if __name__ == "__main__":
     agus = []
     
     if 'content' in os.listdir('/'):
-        agus.append(("pip install xformers==0.0.22.post7", "Installing xformers..."))
+        agus.append(("pip install xformers==0.0.23.post1 triton==2.1.0", "Installing xformers..."))
     elif 'kaggle' in os.listdir('/'):
         agus.append(("pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2", "Installing torch..."))
-        agus.append(("pip install xformers==0.0.23.post1", "Installing xformers..."))
+        agus.append(("pip install xformers==0.0.23.post1 triton==2.1.0", "Installing xformers..."))
     else:
         agus.append((""))
             
