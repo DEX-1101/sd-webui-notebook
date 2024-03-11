@@ -31,7 +31,7 @@ def kontolondon(oppai, asu, si_kontol, kntl, debug=True):
 
 if __name__ == "__main__":
     rudi = [
-        ("apt -y install aria2", "aria2"),
+        ("apt-get update && apt -y install aria2", "aria2"),
         ("apt-get install lz4", "lz4"),
         ("pip install colorama", "colorama"),
         ("npm install -g localtunnel", "localtunnel"),
