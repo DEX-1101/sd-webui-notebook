@@ -46,7 +46,7 @@ if __name__ == "__main__":
         (f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/ui.tar.lz4 -o ui.tar.lz4 && tar -xI lz4 -f ui.tar.lz4 && mv {ui}/kaggle/working/x1101 {ui} && rm {ui}/ui.tar.lz4 && rm -rf {ui}/kaggle", "Installing UI..."),
         (f"cd {git_path} && rm -rf sd-civitai-browser-plus && git clone https://github.com/BlafKing/sd-civitai-browser-plus", "Applying fix..."),
         (f"cd {ui_path} && git reset --hard && git pull && git switch {branch} && git pull && git reset --hard", "Updating UI..."),
-        (f"find {git_path} -mindepth 1 -maxdepth 1 -type d -print -exec git -C {{}} reset --hard \;", "Updating Extensions...")
+        (f"find {git_path} -mindepth 1 -maxdepth 1 -type d -print -exec git -C {{}} pull \; && find {git_path} -mindepth 1 -maxdepth 1 -type d -print -exec git -C {{}} reset --hard \;", "Updating Extensions...")
         
     ]
 
