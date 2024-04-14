@@ -20,8 +20,8 @@ def kontolondon(oppai, asu, si_kontol, kntl, debug=True):
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
     try:
-        subprocess.run(oppai, check=True, shell=True, text=True)  # for debug
-        #subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        #subprocess.run(oppai, check=True, shell=True, text=True)  # for debug
+        subprocess.run(oppai, check=True, shell=True, text=True,  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         si_kontol += 1
     except subprocess.CalledProcessError as e:
         print(f"Error at [{asu}]: {e}")
@@ -45,14 +45,14 @@ if __name__ == "__main__":
         (f"wget https://raw.githubusercontent.com/DEX-1101/SecretNAI/main/template.txt -O {ui}/download_list.txt", "download_list.txt"),
         (f"aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/ui.tar.lz4 -o ui.tar.lz4 && tar -xI lz4 -f ui.tar.lz4 && mv {ui}/kaggle/working/x1101 {ui} && rm {ui}/ui.tar.lz4 && rm -rf {ui}/kaggle", "Installing UI..."),
         (f"cd {ui_path} && git reset --hard && git pull && git switch {branch} && git pull && git reset --hard", "Updating UI..."),
-        (f"rm -rf {git_path}/* && cd {git_path} && git clone https://github.com/BlafKing/sd-civitai-browser-plus && git clone https://github.com/Mikubill/sd-webui-controlnet && git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete && git clone https://github.com/DEX-1101/sd-encrypt-image && git clone https://github.com/DEX-1101/timer && git clone https://github.com/etherealxx/batchlinks-webui && git clone https://github.com/Bing-su/adetailer.git && git clone https://github.com/zanllp/sd-webui-infinite-image-browsing && git clone https://github.com/thomasasfk/sd-webui-aspect-ratio-helper && git clone https://github.com/hako-mikan/sd-webui-regional-prompter && git clone https://github.com/picobyte/stable-diffusion-webui-wd14-tagger && git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111 && git clone https://github.com/Haoming02/sd-webui-tabs-extension", "Installing Extensions..."),
+        (f"rm -rf {git_path}/* && cd {git_path} && git clone https://github.com/BlafKing/sd-civitai-browser-plus && git clone https://github.com/Mikubill/sd-webui-controlnet && git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete && git clone https://github.com/DEX-1101/sd-encrypt-image && git clone https://github.com/DEX-1101/timer && git clone https://github.com/gutris1/sd-hub && git clone https://github.com/Bing-su/adetailer.git && git clone https://github.com/zanllp/sd-webui-infinite-image-browsing && git clone https://github.com/thomasasfk/sd-webui-aspect-ratio-helper && git clone https://github.com/hako-mikan/sd-webui-regional-prompter && git clone https://github.com/picobyte/stable-diffusion-webui-wd14-tagger && git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111 && git clone https://github.com/Haoming02/sd-webui-tabs-extension", "Installing Extensions..."),
         
     ]
 
     agus = []
     
     if 'content' in os.listdir('/'):
-        agus.append(("pip install xformers==0.0.26.dev769", "Installing xformers..."))
+        agus.append(("pip install xformers==0.0.25 --no-deps", "Installing xformers..."))
     elif 'kaggle' in os.listdir('/'):
         agus.append(("pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2 --extra-index-url https://download.pytorch.org/whl/cu121", "Installing torch..."))
         agus.append(("pip install xformers==0.0.23.post1 triton==2.1.0", "Installing xformers..."))
