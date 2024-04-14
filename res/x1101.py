@@ -36,6 +36,7 @@ def kontolondon(oppai, asu, si_kontol, kntl, debug=True):
 
 if __name__ == "__main__":   
     cprint(f"[+] PyTorch version :", torch_ver, "| Cuda :", cuda_ver, "| GPU Access :", is_gpu, color="flat_red")
+    print_line(0)
     
     rudi = [
         ("apt-get update && apt -y install aria2", "aria2"),
