@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+import torch
 from colablib.colored_print import cprint, print_line
 
 if 'content' in os.listdir('/'):
@@ -16,6 +17,10 @@ branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
+torch_ver = torch.__version__
+cuda_ver = torch.version.cuda
+is_gpu = torch.cuda.is_available()
+
 def kontolondon(oppai, asu, si_kontol, kntl, debug=True):   
     start_time = time.time() 
     cprint(f"    > {asu}", color="flat_cyan")
@@ -29,7 +34,9 @@ def kontolondon(oppai, asu, si_kontol, kntl, debug=True):
     end_time = time.time()
     return si_kontol, kntl, end_time - start_time
 
-if __name__ == "__main__":
+if __name__ == "__main__":   
+    cprint(f"[+] PyTorch version :", torch_ver, "| Cuda :", cuda_ver, "| GPU Access :", is_gpu", color="flat_yellow")
+    
     rudi = [
         ("apt-get update && apt -y install aria2", "aria2"),
         ("apt-get install lz4", "lz4"),
