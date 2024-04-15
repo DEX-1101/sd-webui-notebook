@@ -19,7 +19,9 @@ git_path = os.path.join(ui_path, "extensions")
 
 torch_ver = torch.__version__
 cuda_ver = torch.version.cuda
-is_gpu = torch.cuda.is_available()
+is_gpu = "Yes." if torch.cuda.is_available() else "GPU not detected."
+
+print(is_gpu)
 
 def kontolondon(oppai, asu, si_kontol, kntl, debug=True):   
     start_time = time.time() 
