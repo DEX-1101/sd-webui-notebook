@@ -71,7 +71,7 @@ if __name__ == "__main__":
     kntl = 0
     total_time = 0
     
-    cprint(f"[+] Installing [{env}] Requirments", color="flat_yellow")
+    cprint(f"[+] Installing [{env}] Requirements", color="flat_yellow")
     for oppai, asu in rudi + yanto + agus:
         si_kontol, kntl, command_time = kontolondon(oppai, asu, si_kontol, kntl)
         total_time += command_time
