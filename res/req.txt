@@ -1,6 +1,1 @@
-import os
-
-if 'kaggle' in os.listdir('/'):
-    print("Using Kaggle")
-else:
-    print("Not using Kaggle")
+https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/new_tunnel
