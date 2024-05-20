@@ -18,6 +18,7 @@ List of all available args :
 --zrok_token   : Token for tunneling with Zrok. This is optional.
 --hub_token    : URL tha contains token for HUB extension for easily downloading stuff inside WebUI.
 ```
+**Note** : To download model/lora or extension use ``--pastebin`` option, use [these](https://pastebin.com/XahpVjuT) format.
 
 ## How to register zrok tunnel
   - Register [Here](https://colab.research.google.com/github/DEX-1101/sd-webui-notebook/blob/main/zrok_sign_up.ipynb). Just follow the instruction on it.
