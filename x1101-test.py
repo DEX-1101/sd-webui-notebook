@@ -15,7 +15,7 @@ def progress_bar():
     sys.stdout.flush()
     print() 
 
-def run_subprocesses():
+def run_subprocesses_f():
     global progress_done
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -26,7 +26,7 @@ def run_subprocesses():
 # Flag to indicate when the subprocesses are done
 progress_done = False
 progress_thread = Thread(target=progress_bar)
-subprocess_thread = Thread(target=run_subprocesses)
+subprocess_thread = Thread(target=run_subprocesses_f)
 
 progress_thread.start()
 subprocess_thread.start()
