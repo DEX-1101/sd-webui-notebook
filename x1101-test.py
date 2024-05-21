@@ -220,11 +220,11 @@ def download_file_with_aria2(url, save_dir='.'):
     
     # Start the aria2c process
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    cprint(f"    Downloading {url}", color="flat_cyan")
+    cprint(f"Downloading {url}", color="red")
     process.wait()  # Ensure the process has completed
     
     if process.returncode == 0:
-        cprint(f"    File saved as {local_filename}", color="flat_cyan")
+        cprint(f"File saved as {local_filename}", color="red")
     else:
         cprint(f"    Download failed for: {url}", color="flat_red")
 
@@ -297,7 +297,8 @@ if __name__ == "__main__":
             subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    
+
+    sleep(2)
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
     if len(output_lines) == 0:
@@ -306,11 +307,6 @@ if __name__ == "__main__":
         xformers_version = output_lines[0]
         #print(xformers_version)
     
-    print_line(0)
-    cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| xFormers :", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
-    print_line(0)
-    cprint("[+] Preparing Notebook", color="flat_yellow")
-        
     # Download the link file
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
@@ -318,6 +314,10 @@ if __name__ == "__main__":
     download_from_link_file(link_file_path)
 
     ############### UI ####################  
+    
+    print_line(0)
+    cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| xFormers :", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
+    print_line(0)
 
     print_line(0)
     cprint(f"[+] Installing Requirements", color="flat_yellow")
