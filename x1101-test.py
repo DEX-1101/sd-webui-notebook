@@ -17,6 +17,16 @@ def progress_bar():
 
 def run_subprocesses_f():
     global progress_done
+    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
+        if args.debug:
+            subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True)
+        else:
+            subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
+        if args.debug:
+            subprocess.run("pip install xformers==0.0.26.post1", shell=True)
+        else:
+            subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -282,17 +292,6 @@ if __name__ == "__main__":
     if args.debug:
         cprint("    Debug mode enabled", color="flat_red")
         show_output = True
-        
-    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        if args.debug:
-            subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True)
-        else:
-            subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
-        if args.debug:
-            subprocess.run("pip install xformers==0.0.26.post1", shell=True)
-        else:
-            subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
