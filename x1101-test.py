@@ -21,7 +21,7 @@ def progress_bar2():
     while not progress_done2:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
         sys.stdout.flush()
-        time.sleep(1)
+        time.sleep(2)
     sys.stdout.write(']ok')
     sys.stdout.flush()
     print() 
@@ -35,7 +35,7 @@ def run_subprocesses_f():
     progress_done = True
     
 def run_subprocesses_x():
-    global progress_done
+    global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
         x_ver = "0.0.25"
         #cprint(f"Installing xformers {x_ver}...", color="red")
@@ -50,7 +50,7 @@ def run_subprocesses_x():
             subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    progress_done = True
+    progress_done2 = True
 
 # Flag to indicate when the subprocesses are done
 progress_done = False
