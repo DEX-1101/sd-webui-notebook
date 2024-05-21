@@ -294,19 +294,19 @@ if __name__ == "__main__":
         else:
             subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
-output_lines = result.stdout.splitlines()
-if len(output_lines) == 0:
-    print("not installed")
-else:
-    xformers_version = output_lines[0]
-    #print(xformers_version)
-
-print_line(0)
-cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| xFormers :", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
-print_line(0)
-cprint("[+] Preparing Notebook", color="flat_yellow")
+    result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
+    output_lines = result.stdout.splitlines()
+    if len(output_lines) == 0:
+        print("not installed")
+    else:
+        xformers_version = output_lines[0]
+        #print(xformers_version)
     
+    print_line(0)
+    cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| xFormers :", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
+    print_line(0)
+    cprint("[+] Preparing Notebook", color="flat_yellow")
+        
     # Download the link file
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
