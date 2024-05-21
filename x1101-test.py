@@ -52,6 +52,17 @@ def run_subprocesses_x():
             subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done2 = True
 
+
+#####################
+# FIRST
+progress_done = False
+progress_thread = Thread(target=progress_bar)
+subprocess_thread = Thread(target=run_subprocesses_f)
+progress_thread.start()
+subprocess_thread.start()
+subprocess_thread.join()
+progress_thread.join()
+
 import argparse
 import torch
 import re
@@ -295,15 +306,6 @@ if __name__ == "__main__":
     if args.debug:
         cprint("Debug mode enabled", color="red")
         show_output = True
-    
-    # FIRST
-    progress_done = False
-    progress_thread = Thread(target=progress_bar)
-    subprocess_thread = Thread(target=run_subprocesses_f)
-    progress_thread.start()
-    subprocess_thread.start()
-    subprocess_thread.join()
-    progress_thread.join()
 
     # SECOND
     progress_done2 = False
