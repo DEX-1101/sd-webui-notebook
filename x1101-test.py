@@ -15,7 +15,7 @@ def progress_bar():
     sys.stdout.flush()
     print() 
     
-def run_subprocesses_f():
+def run_subprocesses_f(show_output=False):
     global progress_done
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
         if show_output:
