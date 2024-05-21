@@ -316,7 +316,7 @@ if __name__ == "__main__":
     
     progress_done2 = False
     progress_thread = Thread(target=progress_bar2)
-    subprocess_thread = Thread(target=run_subprocesses_f)
+    subprocess_thread = Thread(target=run_subprocesses_x)
     
     progress_thread.start()
     subprocess_thread.start()
