@@ -16,7 +16,7 @@ def progress_bar():
     print()
 
 def progress_bar2():
-    sys.stdout.write('Installing \033[31mx1101.py\033[0m [')
+    sys.stdout.write('Installing \033[31mxFormers\033[0m [')
     sys.stdout.flush()
     while not progress_done2:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
@@ -38,14 +38,14 @@ def run_subprocesses_x():
     global progress_done
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
         x_ver = "0.0.25"
-        cprint(f"Installing xformers {x_ver}...", color="red")
+        #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
         x_ver = "0.0.26.post1"
-        cprint(f"Installing xformers {x_ver}...", color="red")
+        #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
