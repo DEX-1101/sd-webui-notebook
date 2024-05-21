@@ -64,12 +64,12 @@ else:
      cprint('Error. Enviroment not detected', color="flat_red")
 
 if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-    if debug:
+    if args.debug:
         subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True)
     else:
         subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
-    if debug:
+    if args.debug:
         subprocess.run("pip install xformers==0.0.26.post1", shell=True)
     else:
         subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
