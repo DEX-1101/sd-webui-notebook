@@ -15,7 +15,6 @@ def progress_bar():
     sys.stdout.flush()
     print() 
     
-args = parser.parse_args()
 def run_subprocesses_f():
     global progress_done
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
@@ -293,7 +292,9 @@ if __name__ == "__main__":
     if args.debug:
         cprint("    Debug mode enabled", color="flat_red")
         show_output = True
-
+        
+    run_subprocesses_f()
+    
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
     if len(output_lines) == 0:
