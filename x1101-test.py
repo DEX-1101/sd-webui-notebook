@@ -298,7 +298,7 @@ if __name__ == "__main__":
         else:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    sleep(2)
+    time.sleep(2)
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
     if len(output_lines) == 0:
