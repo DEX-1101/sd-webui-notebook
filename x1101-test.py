@@ -21,7 +21,7 @@ def progress_bar2():
     while not progress_done2:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
         sys.stdout.flush()
-        time.sleep(2)
+        time.sleep(3)
     sys.stdout.write(']ok')
     sys.stdout.flush()
     print() 
