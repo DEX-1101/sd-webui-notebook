@@ -13,6 +13,17 @@ def progress_bar():
         time.sleep(1)
     sys.stdout.write(']ok')
     sys.stdout.flush()
+    print()
+
+def progress_bar2():
+    sys.stdout.write('Installing \033[31mx1101.py\033[0m [')
+    sys.stdout.flush()
+    while not progress_done2:
+        sys.stdout.write('\033[92m' + '■' + '\033[0m')
+        sys.stdout.flush()
+        time.sleep(1)
+    sys.stdout.write(']ok')
+    sys.stdout.flush()
     print() 
     
 def run_subprocesses_f():
@@ -22,6 +33,22 @@ def run_subprocesses_f():
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
+    
+def run_subprocesses_x():
+    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
+        x_ver = "0.0.25"
+        cprint(f"Installing xformers {x_ver}...", color="red")
+        if args.debug:
+            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
+        else:
+            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
+        x_ver = "0.0.26.post1"
+        cprint(f"Installing xformers {x_ver}...", color="red")
+        if args.debug:
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True)
+        else:
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 # Flag to indicate when the subprocesses are done
 progress_done = False
@@ -283,21 +310,28 @@ if __name__ == "__main__":
         cprint("Debug mode enabled", color="red")
         show_output = True
         
-    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.25"
-        cprint(f"Installing xformers {x_ver}...", color="red")
-        if args.debug:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
-        else:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.26.post1"
-        cprint(f"Installing xformers {x_ver}...", color="red")
-        if args.debug:
-            subprocess.run(f"pip install xformers=={x_ver}", shell=True)
-        else:
-            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    global progress_done2
+    run_subprocesses_x()
+    progress_done2 = True
+    
+    progress_done2 = False
+    progress_thread = Thread(target=progress_bar2)
+    subprocess_thread = Thread(target=run_subprocesses_f)
+    
+    progress_thread.start()
+    subprocess_thread.start()
+    
+    # Wait for both threads to complete
+    subprocess_thread.join()
+    progress_thread.join()
 
+    # Download the link file
+    download_file_with_aria2(args.req)
+    link_file_path = os.path.join('.', args.req.split('/')[-1])
+    # Download files listed in the link file
+    download_from_link_file(link_file_path)
+
+    ############### UI ####################  
     time.sleep(2)
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
@@ -306,14 +340,6 @@ if __name__ == "__main__":
     else:
         xformers_version = output_lines[0]
         #print(xformers_version)
-    
-    # Download the link file
-    download_file_with_aria2(args.req)
-    link_file_path = os.path.join('.', args.req.split('/')[-1])
-    # Download files listed in the link file
-    download_from_link_file(link_file_path)
-
-    ############### UI ####################  
     
     print_line(0)
     cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| xFormers :", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
