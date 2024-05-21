@@ -17,6 +17,7 @@ def progress_bar():
     
 def run_subprocesses_f():
     global progress_done
+    if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -294,7 +295,6 @@ if __name__ == "__main__":
             subprocess.run("pip install xformers==0.0.26.post1", shell=True)
         else:
             subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    if not os.path.exists("x1101"):
     
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
