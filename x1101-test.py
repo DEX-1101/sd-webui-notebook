@@ -63,6 +63,18 @@ elif 'kaggle' in os.listdir('/'):
 else:
      cprint('Error. Enviroment not detected', color="flat_red")
 
+if 'content' in os.listdir('/') and not os.path.exists("x1101"):
+    if debug:
+        subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True)
+    else:
+        subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
+    if debug:
+        subprocess.run("pip install xformers==0.0.26.post1", shell=True)
+    else:
+        subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+
 
 result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
 output_lines = result.stdout.splitlines()
@@ -295,18 +307,6 @@ if __name__ == "__main__":
     if args.debug:
         cprint("    Debug mode enabled", color="flat_red")
         show_output = True
-
-    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        if debug:
-            subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True)
-        else:
-            subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
-        if debug:
-            subprocess.run("pip install xformers==0.0.26.post1", shell=True)
-        else:
-            subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
 
     
     # Download the link file
