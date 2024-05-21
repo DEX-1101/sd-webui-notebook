@@ -332,8 +332,9 @@ if __name__ == "__main__":
     torch_ver = torch.__version__
     cuda_ver = torch.version.cuda
     gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
+    
     print_line(0)
-    cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| , xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
+    cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
     print_line(0)
 
     print_line(0)
