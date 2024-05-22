@@ -50,6 +50,7 @@ def run_subprocesses_x():
             subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    progress_done2 = True
 
 #####################
 # FIRST
@@ -77,7 +78,6 @@ from colorama import init, Fore, Back, Style
 torch_ver = torch.__version__
 cuda_ver = torch.version.cuda
 gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
-progress_done2 = True
 
 if 'content' in os.listdir('/'):
     root_path = "/content"
