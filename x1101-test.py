@@ -15,7 +15,7 @@ def progress_bar():
     sys.stdout.flush()
     print()
 
-def progress_bar2():
+def progress_bar2():    
     sys.stdout.write('Installing \033[31mxFormers\033[0m [')
     sys.stdout.flush()
     while not progress_done2:
@@ -50,11 +50,6 @@ def run_subprocesses_x():
             subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    torch_ver = torch.__version__
-    cuda_ver = torch.version.cuda
-    gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
-    progress_done2 = True
-
 
 #####################
 # FIRST
@@ -78,6 +73,11 @@ from colablib.colored_print import cprint, print_line
 from colablib.utils.config_utils import read_config
 from colablib.utils.git_utils import clone_repo
 from colorama import init, Fore, Back, Style
+
+torch_ver = torch.__version__
+cuda_ver = torch.version.cuda
+gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
+progress_done2 = True
 
 if 'content' in os.listdir('/'):
     root_path = "/content"
