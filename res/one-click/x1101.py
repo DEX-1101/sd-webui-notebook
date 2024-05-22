@@ -11,33 +11,54 @@ def progress_bar():
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
         sys.stdout.flush()
         time.sleep(1)
-    sys.stdout.write('][ok]')
+    sys.stdout.write(']ok')
+    sys.stdout.flush()
+    print()
+
+def progress_bar2():    
+    sys.stdout.write('Installing \033[31mxFormers\033[0m [')
+    sys.stdout.flush()
+    while not progress_done2:
+        sys.stdout.write('\033[92m' + '■' + '\033[0m')
+        sys.stdout.flush()
+        time.sleep(10)
+    sys.stdout.write(']ok')
     sys.stdout.flush()
     print() 
-
-def run_subprocesses():
+    
+def run_subprocesses_f():
     global progress_done
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        subprocess.run("pip install xformers==0.0.25 --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
-        #subprocess.run("pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2 --extra-index-url https://download.pytorch.org/whl/cu121", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run("pip install xformers==0.0.26.post1", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
     progress_done = True
+    
+def run_subprocesses_x():
+    global progress_done2
+    if 'content' in os.listdir('/') and not os.path.exists("x1101"):
+        x_ver = "0.0.25"
+        #cprint(f"Installing xformers {x_ver}...", color="red")
+        if args.debug:
+            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
+        else:
+            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
+        x_ver = "0.0.26.post1"
+        #cprint(f"Installing xformers {x_ver}...", color="red")
+        if args.debug:
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True)
+        else:
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    progress_done2 = True
 
-# Flag to indicate when the subprocesses are done
+#####################
+# FIRST
 progress_done = False
 progress_thread = Thread(target=progress_bar)
-subprocess_thread = Thread(target=run_subprocesses)
-
+subprocess_thread = Thread(target=run_subprocesses_f)
 progress_thread.start()
 subprocess_thread.start()
-
-# Wait for both threads to complete
 subprocess_thread.join()
 progress_thread.join()
 
@@ -69,19 +90,6 @@ elif 'kaggle' in os.listdir('/'):
 else:
      cprint('Error. Enviroment not detected', color="flat_red")
 
-
-result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
-output_lines = result.stdout.splitlines()
-if len(output_lines) == 0:
-    print("xFormers not installed")
-else:
-    xformers_version = output_lines[0]
-    #print(xformers_version)
-
-print_line(0)
-cprint(f"[+] PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="flat_green")
-print_line(0)
-cprint("[+] Preparing Notebook", color="flat_yellow")
 
 ################# UI #################
 branch = "master"
@@ -239,11 +247,11 @@ def download_file_with_aria2(url, save_dir='.'):
     
     # Start the aria2c process
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    cprint(f"    Downloading {url}", color="flat_cyan")
+    cprint(f"Downloading {url}", color="default")
     process.wait()  # Ensure the process has completed
     
     if process.returncode == 0:
-        cprint(f"    File saved as {local_filename}", color="flat_cyan")
+        cprint(f"File saved as {local_filename}", color="red")
     else:
         cprint(f"    Download failed for: {url}", color="flat_red")
 
@@ -299,9 +307,18 @@ if __name__ == "__main__":
     secret           = args.hub_token
 
     if args.debug:
-        cprint("    Debug mode enabled", color="flat_red")
+        cprint("Debug mode enabled", color="red")
         show_output = True
-    
+
+    # SECOND
+    progress_done2 = False
+    progress_thread = Thread(target=progress_bar2)
+    subprocess_thread = Thread(target=run_subprocesses_x)
+    progress_thread.start()
+    subprocess_thread.start()
+    subprocess_thread.join()
+    progress_thread.join()
+
     # Download the link file
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
@@ -309,6 +326,15 @@ if __name__ == "__main__":
     download_from_link_file(link_file_path)
 
     ############### UI ####################  
+    result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
+    output_lines = result.stdout.splitlines()
+    if len(output_lines) == 0:
+        print("xFormers not installed")
+    else:
+        xformers_version = output_lines[0]
+    
+    print_line(0)
+    cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
 
     print_line(0)
     cprint(f"[+] Installing Requirements", color="flat_yellow")
@@ -349,4 +375,3 @@ if __name__ == "__main__":
         lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
         subprocess.run(lol, shell=True)       
         subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 --ngrok {ngrok_token} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
-        
