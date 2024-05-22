@@ -244,7 +244,7 @@ def download_file_with_aria2(url, save_dir='.'):
     
     # Start the aria2c process
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    cprint(f"Downloading {url}", color="white")
+    cprint(f"Downloading {url}", color="default")
     process.wait()  # Ensure the process has completed
     
     if process.returncode == 0:
@@ -378,4 +378,3 @@ if __name__ == "__main__":
         lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
         subprocess.run(lol, shell=True)       
         subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 --ngrok {ngrok_token} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
-        
