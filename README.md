@@ -20,12 +20,13 @@ List of all available args :
 ```
 **Note** : To download model/lora or extension use ``--pastebin`` option, use [these](https://pastebin.com/XahpVjuT) format.
 
-## How to register zrok tunnel
+## How to use/register zrok tunnel
   - Register [Here](https://colab.research.google.com/github/DEX-1101/sd-webui-notebook/blob/main/zrok_sign_up.ipynb). Just follow the instruction on it.
 
- 
+![sss](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_13.png)
 ![markdown](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_27.png)
 ![ss](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_706.png)
+
  
 
 
