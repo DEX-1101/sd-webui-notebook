@@ -16,7 +16,7 @@ def progress_bar():
     print()
 
 def progress_bar2():    
-    sys.stdout.write('Installing \033[31mxFormers\033[0m [')
+    sys.stdout.write(f'Installing \033[31mxFormers {x_ver}\033[0m [')
     sys.stdout.flush()
     while not progress_done2:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
