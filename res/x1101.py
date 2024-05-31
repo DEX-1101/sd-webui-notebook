@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print_line(0)
     
     rudi = [
-        ("apt-get update && apt -y install aria2", "aria2"),
+        ("apt-get update && apt -y install aria2 && pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", "aria2"),
         ("apt-get install lz4", "lz4"),
         ("pip install colorama", "colorama"),
         ("npm install -g localtunnel", "localtunnel"),
