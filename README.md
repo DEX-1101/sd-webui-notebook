@@ -14,7 +14,7 @@ List of all available args :
 --config       : URL for WebUI config file if you want to import your config.
 --pastebin     : Pastebin URL if you want to download model/lora/extensions/embeddings. Currently supported HF only.
 --hf_token     : HuggingFace's Token if you download it from private repo for Pastebin download.
---ngrok_token  : Token for tunneling with ngrok. This is REQUIRED even you're don't planning to use it.
+--ngrok_token  : Token for tunneling with ngrok.
 --zrok_token   : Token for tunneling with Zrok. This is optional.
 --hub_token    : URL tha contains token for HUB extension for easily downloading stuff inside WebUI.
 ```
