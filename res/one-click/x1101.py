@@ -291,8 +291,8 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=str, help="The URL of your WebUI's config file if you want to import it.")
     parser.add_argument("--pastebin", type=str, help="Pastebin URL if you want to download model/lora/extensions.")
     parser.add_argument("--hf_token", type=str, help="HuggingFace's Token if you download it from private repo for Pastebin download.")
-    parser.add_argument("--zrok_token", type=str, help="Token for tunneling with Zrok. This is optional.")
-    parser.add_argument("--ngrok_token", type=str, help="Token for tunneling with ngrok. This is REQUIRED even you're don't planning to use it.")
+    parser.add_argument("--zrok_token", type=str, help="Token for tunneling with Zrok (optional).")
+    parser.add_argument("--ngrok_token", type=str, help="Token for tunneling with ngrok (optional).")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
     
