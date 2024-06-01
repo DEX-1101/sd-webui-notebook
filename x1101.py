@@ -306,6 +306,7 @@ if __name__ == "__main__":
     ngrok_token      = args.ngrok_token
     import_config    = args.config
     secret           = args.hub_token
+    ngrok            = ""
 
     if args.debug:
         cprint("Debug mode enabled", color="red")
