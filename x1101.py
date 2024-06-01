@@ -348,7 +348,7 @@ if __name__ == "__main__":
     if args.hub_token:
         subprocess.run(f"mkdir -p {ui}/x1101 && wget -q {secret} -O {ui}/x1101/sd-hub-token.json", shell=True)
 
-    if args.ngrok_token
+    if args.ngrok_token:
         ngrok = f"--ngrok {ngrok_token}"
     
     if args.pastebin:
