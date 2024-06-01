@@ -292,7 +292,7 @@ if __name__ == "__main__":
     parser.add_argument("--pastebin", type=str, help="Pastebin URL if you want to download model/lora/extensions.")
     parser.add_argument("--hf_token", type=str, help="HuggingFace's Token if you download it from private repo for Pastebin download.")
     parser.add_argument("--zrok_token", type=str, help="Token for tunneling with Zrok. This is optional.")
-    parser.add_argument("--ngrok_token", required=True, type=str, help="Token for tunneling with ngrok. This is REQUIRED even you're don't planning to use it.")
+    parser.add_argument("--ngrok_token", type=str, help="Token for tunneling with ngrok. This is REQUIRED even you're don't planning to use it.")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
     
@@ -347,6 +347,9 @@ if __name__ == "__main__":
     
     if args.hub_token:
         subprocess.run(f"mkdir -p {ui}/x1101 && wget -q {secret} -O {ui}/x1101/sd-hub-token.json", shell=True)
+
+    if args.ngrok_token
+        ngrok = f"--ngrok {ngrok_token}"
     
     if args.pastebin:
         start_time    = time.time()
@@ -375,4 +378,4 @@ if __name__ == "__main__":
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
         lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
         subprocess.run(lol, shell=True)       
-        subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 --ngrok {ngrok_token} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
+        subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
