@@ -67,14 +67,6 @@ def run_subprocesses_x():
     progress_done2 = True
 
 #####################
-# FIRST
-progress_done = False
-progress_thread = Thread(target=progress_bar)
-subprocess_thread = Thread(target=run_subprocesses_f)
-progress_thread.start()
-subprocess_thread.start()
-subprocess_thread.join()
-progress_thread.join()
 
 import argparse
 import torch
@@ -283,10 +275,6 @@ public_ipv4 = get_public_ip(version='ipv4')
 ############# TUNNELS #######################
 
 if __name__ == "__main__":
-    torch_ver = torch.__version__
-    cuda_ver = torch.version.cuda
-    gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
-    
     parser = argparse.ArgumentParser(description="Ada indo coy !!!.")
     parser.add_argument("--req", type=str, help="Required file for notebook to run.")
     parser.add_argument("--config", type=str, help="The URL of your WebUI's config file if you want to import it.")
@@ -296,7 +284,6 @@ if __name__ == "__main__":
     parser.add_argument("--ngrok_token", type=str, help="Token for tunneling with ngrok (optional).")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
-    
     args = parser.parse_args()
 
     # variable
@@ -313,6 +300,15 @@ if __name__ == "__main__":
         cprint("Debug mode enabled", color="red")
         show_output = True
 
+    # FIRST
+    progress_done = False
+    progress_thread = Thread(target=progress_bar)
+    subprocess_thread = Thread(target=run_subprocesses_f)
+    progress_thread.start()
+    subprocess_thread.start()
+    subprocess_thread.join()
+    progress_thread.join()
+
     # SECOND
     progress_done2 = False
     progress_thread = Thread(target=progress_bar2)
@@ -321,6 +317,10 @@ if __name__ == "__main__":
     subprocess_thread.start()
     subprocess_thread.join()
     progress_thread.join()
+
+    torch_ver = torch.__version__
+    cuda_ver = torch.version.cuda
+    gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
 
     # Download the link file
     download_file_with_aria2(args.req)
