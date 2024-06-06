@@ -48,7 +48,7 @@ def run_subprocesses_f():
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if env == 'Kaggle':
-            subprocess.run(f"mkdir {ui}/env && cd {ui}/env && aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/venv_torch230.tar.lz4 -o venv_torch230.tar.lz4 && tar -xI lz4 -f venv_torch230.tar.lz4 && mv -f {ui}/env /opt/conda/lib/python3.10/site-packages", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"mkdir {ui}/env && cd {ui}/env && aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/venv_torch230.tar.lz4 -o venv_torch230.tar.lz4 && tar -xI lz4 -f venv_torch230.tar.lz4 && mv -f {ui}/env/* /opt/conda/lib/python3.10/site-packages", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
     
 def run_subprocesses_x():
