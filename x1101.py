@@ -89,12 +89,6 @@ from colablib.utils.config_utils import read_config
 from colablib.utils.git_utils import clone_repo
 from colorama import init, Fore, Back, Style
 
-torch_ver = torch.__version__
-cuda_ver = torch.version.cuda
-gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
-
-
-
 ################# UI #################
 branch = "master"
 ui_path = os.path.join(ui, "x1101")
@@ -289,6 +283,10 @@ public_ipv4 = get_public_ip(version='ipv4')
 ############# TUNNELS #######################
 
 if __name__ == "__main__":
+    torch_ver = torch.__version__
+    cuda_ver = torch.version.cuda
+    gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
+    
     parser = argparse.ArgumentParser(description="Ada indo coy !!!.")
     parser.add_argument("--req", type=str, help="Required file for notebook to run.")
     parser.add_argument("--config", type=str, help="The URL of your WebUI's config file if you want to import it.")
