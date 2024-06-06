@@ -60,6 +60,7 @@ def run_subprocesses_x():
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            
     elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
         x_ver = "0.0.26.post1"
         #cprint(f"Installing xformers {x_ver}...", color="red")
@@ -332,15 +333,16 @@ if __name__ == "__main__":
     download_from_link_file(link_file_path)
 
     ############### UI ####################  
-    result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
-    output_lines = result.stdout.splitlines()
-    if len(output_lines) == 0:
-        cprint("xFormers not installed", color="red")
-    else:
-        xformers_version = output_lines[0]
+    #result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
+    #output_lines = result.stdout.splitlines()
+    #if len(output_lines) == 0:
+    #    cprint("xFormers not installed", color="red")
+    #else:
+    #    xformers_version = output_lines[0]
     
     print_line(0)
-    cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
+    #cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
+    cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
 
     print_line(0)
     cprint(f"[+] Installing Requirements", color="flat_yellow")
