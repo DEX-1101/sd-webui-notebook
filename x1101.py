@@ -4,6 +4,17 @@ import os
 import subprocess
 from threading import Thread
 
+if 'content' in os.listdir('/'):
+    root_path = "/content"
+    ui = "/content"
+    env = 'Colab'
+elif 'kaggle' in os.listdir('/'):
+    root_path = "/kaggle/working"
+    ui = "/kaggle/working"
+    env = 'Kaggle'
+else:
+     cprint('Error. Enviroment not detected', color="flat_red")
+
 def progress_bar():
     sys.stdout.write('Loading \033[31mx1101.py\033[0m [')
     sys.stdout.flush()
@@ -33,12 +44,14 @@ def run_subprocesses_f():
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if env == 'Kaggle':
+        subprocess.run(f"mkdir {ui}/env && cd {ui}/env aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/venv_torch230.tar.lz4 && tar -xI lz4 -f venv_torch230.tar.lz4 && mv -f {ui}/env /opt/conda/lib/python3.10/site-packages && rm -rf {ui}/env", shell=True,)
     progress_done = True
     
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.25"
+        x_ver = "0.0.26.post1"
         #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
@@ -50,7 +63,7 @@ def run_subprocesses_x():
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
-            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done2 = True
 
 #####################
@@ -80,16 +93,6 @@ torch_ver = torch.__version__
 cuda_ver = torch.version.cuda
 gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
 
-if 'content' in os.listdir('/'):
-    root_path = "/content"
-    ui = "/content"
-    env = 'Colab'
-elif 'kaggle' in os.listdir('/'):
-    root_path = "/kaggle/working"
-    ui = "/kaggle/working"
-    env = 'Kaggle'
-else:
-     cprint('Error. Enviroment not detected', color="flat_red")
 
 
 ################# UI #################
@@ -97,7 +100,7 @@ branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-ui = "/kaggle/working"
+#ui = "/kaggle/working"
 
 def run_subprocesses(commands, show_output=False):
     processes = []
