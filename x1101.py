@@ -4,6 +4,9 @@ import os
 import subprocess
 from threading import Thread
 
+if not os.path.exists("x1101"):
+    subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 if 'content' in os.listdir('/'):
     root_path = "/content"
     ui = "/content"
@@ -40,7 +43,7 @@ def progress_bar2():
 def run_subprocesses_f():
     global progress_done
     if not os.path.exists("x1101"):
-        subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+       # subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
