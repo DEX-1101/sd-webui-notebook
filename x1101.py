@@ -57,13 +57,13 @@ def run_subprocesses_x():
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.26.post1"
-        #cprint(f"Installing xformers {x_ver}...", color="red")
-        if args.debug:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
-        else:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    #elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
+    #    x_ver = "0.0.26.post1"
+    #    #cprint(f"Installing xformers {x_ver}...", color="red")
+    #    if args.debug:
+    #        subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
+    #    else:
+    #        subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done2 = True
 
 #####################
