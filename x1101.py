@@ -332,7 +332,7 @@ if __name__ == "__main__":
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
     output_lines = result.stdout.splitlines()
     if len(output_lines) == 0:
-        print("xFormers not installed")
+        cprint("xFormers not installed", color="red")
     else:
         xformers_version = output_lines[0]
     
