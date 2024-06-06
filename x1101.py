@@ -48,9 +48,9 @@ def run_subprocesses_x():
         x_ver = "0.0.26.post1"
         #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
-            #subprocess.run(f"pip install xformers=={x_ver}", shell=True)
+            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
-            #subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done2 = True
 
 #####################
