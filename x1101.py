@@ -4,27 +4,13 @@ import os
 import subprocess
 from threading import Thread
 
-if not os.path.exists("x1101"):
-    subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-if 'content' in os.listdir('/'):
-    root_path = "/content"
-    ui = "/content"
-    env = 'Colab'
-elif 'kaggle' in os.listdir('/'):
-    root_path = "/kaggle/working"
-    ui = "/kaggle/working"
-    env = 'Kaggle'
-else:
-     cprint('Error. Enviroment not detected', color="flat_red")
-
 def progress_bar():
     sys.stdout.write('Loading \033[31mx1101.py\033[0m [')
     sys.stdout.flush()
     while not progress_done:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
         sys.stdout.flush()
-        time.sleep(5)
+        time.sleep(1)
     sys.stdout.write(']ok')
     sys.stdout.flush()
     print()
@@ -35,7 +21,7 @@ def progress_bar2():
     while not progress_done2:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
         sys.stdout.flush()
-        time.sleep(5)
+        time.sleep(10)
     sys.stdout.write(']ok')
     sys.stdout.flush()
     print() 
@@ -43,34 +29,39 @@ def progress_bar2():
 def run_subprocesses_f():
     global progress_done
     if not os.path.exists("x1101"):
-       # subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        if env == 'Kaggle':
-            subprocess.run(f"mkdir {ui}/env && cd {ui}/env && aria2c --console-log-level=error -c -x 16 -s 16 -k 1M https://huggingface.co/x1101/UI/resolve/main/venv_torch230.tar.lz4 -o venv_torch230.tar.lz4 && tar -xI lz4 -f venv_torch230.tar.lz4 && mv -f {ui}/env/* /opt/conda/lib/python3.10/site-packages", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
     
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.26.post1"
+        x_ver = "0.0.25"
         #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            
     elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
         x_ver = "0.0.26.post1"
         #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done2 = True
 
 #####################
+# FIRST
+progress_done = False
+progress_thread = Thread(target=progress_bar)
+subprocess_thread = Thread(target=run_subprocesses_f)
+progress_thread.start()
+subprocess_thread.start()
+subprocess_thread.join()
+progress_thread.join()
 
 import argparse
 import torch
@@ -85,12 +76,28 @@ from colablib.utils.config_utils import read_config
 from colablib.utils.git_utils import clone_repo
 from colorama import init, Fore, Back, Style
 
+torch_ver = torch.__version__
+cuda_ver = torch.version.cuda
+gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
+
+if 'content' in os.listdir('/'):
+    root_path = "/content"
+    ui = "/content"
+    env = 'Colab'
+elif 'kaggle' in os.listdir('/'):
+    root_path = "/kaggle/working"
+    ui = "/kaggle/working"
+    env = 'Kaggle'
+else:
+     cprint('Error. Enviroment not detected', color="flat_red")
+
+
 ################# UI #################
 branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-#ui = "/kaggle/working"
+ui = "/kaggle/working"
 
 def run_subprocesses(commands, show_output=False):
     processes = []
@@ -288,6 +295,7 @@ if __name__ == "__main__":
     parser.add_argument("--ngrok_token", type=str, help="Token for tunneling with ngrok (optional).")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
+    
     args = parser.parse_args()
 
     # variable
@@ -304,15 +312,6 @@ if __name__ == "__main__":
         cprint("Debug mode enabled", color="red")
         show_output = True
 
-    # FIRST
-    progress_done = False
-    progress_thread = Thread(target=progress_bar)
-    subprocess_thread = Thread(target=run_subprocesses_f)
-    progress_thread.start()
-    subprocess_thread.start()
-    subprocess_thread.join()
-    progress_thread.join()
-
     # SECOND
     progress_done2 = False
     progress_thread = Thread(target=progress_bar2)
@@ -322,10 +321,6 @@ if __name__ == "__main__":
     subprocess_thread.join()
     progress_thread.join()
 
-    torch_ver = torch.__version__
-    cuda_ver = torch.version.cuda
-    gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
-
     # Download the link file
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
@@ -333,16 +328,15 @@ if __name__ == "__main__":
     download_from_link_file(link_file_path)
 
     ############### UI ####################  
-    #result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
-    #output_lines = result.stdout.splitlines()
-    #if len(output_lines) == 0:
-    #    cprint("xFormers not installed", color="red")
-    #else:
-    #    xformers_version = output_lines[0]
+    result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
+    output_lines = result.stdout.splitlines()
+    if len(output_lines) == 0:
+        print("xFormers not installed")
+    else:
+        xformers_version = output_lines[0]
     
     print_line(0)
-    #cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
-    cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
+    cprint(f"PyTorch Version :", torch_ver, "| Cuda :", cuda_ver, "| ", xformers_version, "| GPU :", gpu_status, "| Env :", env, "|", color="red")
 
     print_line(0)
     cprint(f"[+] Installing Requirements", color="flat_yellow")
