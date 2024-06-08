@@ -178,7 +178,7 @@ def get_filename(url, token=None):
     if token:
         headers['Authorization'] = 'Bearer hf_token'
        
-def custom_download(custom_dirs):
+def custom_download(custom_dirs, user_header):
     for key, value in custom_dirs.items():
         urls     = value.url.split(",")  # Split the comma-separated URLs
         dst      = value.dst
@@ -361,7 +361,7 @@ if __name__ == "__main__":
             user_header = f"Authorization: Bearer {hf_token}"
             textfile_path = custom_download_list(pastebin_url)
         download_from_textfile(textfile_path, api_key)
-        custom_download(custom_dirs, api_key)
+        custom_download(custom_dirs, user_header api_key)
         elapsed_time  = py_utils.calculate_elapsed_time(start_time)
         
         
