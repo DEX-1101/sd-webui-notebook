@@ -206,11 +206,11 @@ def custom_download(custom_dirs):
                 else:
                    download(url=url, filename=filename, user_header=user_header, dst=dst, quiet=False)
 
-def download_from_textfile(filename):
+def download_from_textfile(filename, api_key):
     for key, urls in parse_urls(filename).items():
         for url in urls:
             if "civitai.com" in url:
-                url += "&ApiKey={civitai_api_key}" if "?" in url else "?ApiKey={civitai_api_key}"
+                url += f"&ApiKey={api_key}" if "?" in url else f"?ApiKey={api_key}"
         key_lower = key.lower()
         if key_lower in custom_dirs:
             if custom_dirs[key_lower].url:
@@ -293,6 +293,7 @@ if __name__ == "__main__":
     parser.add_argument("--hf_token", type=str, help="HuggingFace's Token if you download it from private repo for Pastebin download.")
     parser.add_argument("--zrok_token", type=str, help="Token for tunneling with Zrok (optional).")
     parser.add_argument("--ngrok_token", type=str, help="Token for tunneling with ngrok (optional).")
+    parser.add_argument("--civitai_api", type=str, help="Token.")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
     
@@ -300,6 +301,7 @@ if __name__ == "__main__":
 
     # variable
     args.req = "https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/req.txt"
+    api_key          = args.civitai_api
     pastebin_url     = args.pastebin
     hf_token         = args.hf_token
     zrok_token       = args.zrok_token
@@ -358,9 +360,10 @@ if __name__ == "__main__":
         if pastebin_url:
             user_header = f"Authorization: Bearer {hf_token}"
             textfile_path = custom_download_list(pastebin_url)
-        download_from_textfile(textfile_path)
-        custom_download(custom_dirs)
+        download_from_textfile(textfile_path, api_key)
+        custom_download(custom_dirs, api_key)
         elapsed_time  = py_utils.calculate_elapsed_time(start_time)
+        
         
     print_line(0)
     cprint(f"[+] Starting WebUI...", color="flat_yellow")
