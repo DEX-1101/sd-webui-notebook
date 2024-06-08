@@ -361,7 +361,7 @@ if __name__ == "__main__":
             user_header = f"Authorization: Bearer {hf_token}"
             textfile_path = custom_download_list(pastebin_url)
         download_from_textfile(textfile_path, api_key)
-        custom_download(custom_dirs)
+        custom_download(custom_dirs, user_header)
         elapsed_time  = py_utils.calculate_elapsed_time(start_time)
         
         
