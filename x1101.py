@@ -80,6 +80,14 @@ torch_ver = torch.__version__
 cuda_ver = torch.version.cuda
 gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
 
+branch    = ""
+
+if args.branch:
+    cprint(f"Branch swithced to {branch}", color="flat_green")
+    branch = args.branch
+else:
+    branch = "master"
+
 if 'content' in os.listdir('/'):
     root_path = "/content"
     ui = "/content"
@@ -309,13 +317,6 @@ if __name__ == "__main__":
     import_config    = args.config
     secret           = args.hub_token
     ngrok            = ""
-    branch           = ""
-    
-    if args.branch:
-        cprint(f"Branch swithced to {branch}", color="flat_green")
-        branch = args.branch
-    else:
-        branch = "master"
 
     if args.debug:
         cprint("Debug mode enabled", color="red")
