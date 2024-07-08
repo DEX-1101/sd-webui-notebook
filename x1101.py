@@ -93,7 +93,6 @@ else:
 
 
 ################# UI #################
-branch = "master"
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
@@ -296,6 +295,7 @@ if __name__ == "__main__":
     parser.add_argument("--civitai_api", type=str, help="Token.")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
+    parser.add_argument("--branch", type=str, help="Switch different branch for webui. Default is 'master'.")
     
     args = parser.parse_args()
 
@@ -309,6 +309,12 @@ if __name__ == "__main__":
     import_config    = args.config
     secret           = args.hub_token
     ngrok            = ""
+    
+    if args.branch:
+        cprint("Branch swithced to" args.branch, color="flat_green")
+        branch = args.branch
+    else
+        branch = "master"
 
     if args.debug:
         cprint("Debug mode enabled", color="red")
