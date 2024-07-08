@@ -10,7 +10,7 @@ def progress_bar():
     while not progress_done:
         sys.stdout.write('\033[92m' + '■' + '\033[0m')
         sys.stdout.flush()
-        time.sleep(1)
+        time.sleep(2)
     sys.stdout.write(']ok')
     sys.stdout.flush()
     print()
@@ -313,7 +313,7 @@ if __name__ == "__main__":
     if args.branch:
         cprint("Branch swithced to", args.branch, color="flat_green")
         branch = args.branch
-    else
+    else:
         branch = "master"
 
     if args.debug:
