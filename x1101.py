@@ -313,14 +313,6 @@ if __name__ == "__main__":
     if args.debug:
         cprint("Debug mode enabled", color="red")
         show_output = True
-        
-    if args.branch:
-        branch = args.branch
-        cprint(f"Branch swithced to {branch}", color="flat_green")
-        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True)
-    else:
-        branch = "master"
-        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True)
 
     # SECOND
     progress_done2 = False
@@ -361,6 +353,14 @@ if __name__ == "__main__":
 
     if args.ngrok_token:
         ngrok = f"--ngrok {ngrok_token}"
+
+    if args.branch:
+        branch = args.branch
+        cprint(f"Branch swithced to {branch}", color="flat_green")
+        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True)
+    else:
+        branch = "master"
+        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True)
     
     if args.pastebin:
         start_time    = time.time()
