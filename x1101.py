@@ -82,12 +82,6 @@ gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if tor
 
 branch    = ""
 
-if args.branch:
-    cprint(f"Branch swithced to {branch}", color="flat_green")
-    branch = args.branch
-else:
-    branch = "master"
-
 if 'content' in os.listdir('/'):
     root_path = "/content"
     ui = "/content"
@@ -321,6 +315,12 @@ if __name__ == "__main__":
     if args.debug:
         cprint("Debug mode enabled", color="red")
         show_output = True
+        
+    if args.branch:
+        cprint(f"Branch swithced to {branch}", color="flat_green")
+        branch = args.branch
+    else:
+        branch = "master"
 
     # SECOND
     progress_done2 = False
