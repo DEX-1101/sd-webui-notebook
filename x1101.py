@@ -309,9 +309,10 @@ if __name__ == "__main__":
     import_config    = args.config
     secret           = args.hub_token
     ngrok            = ""
+    branch           = ""
     
     if args.branch:
-        cprint("Branch swithced to", args.branch, color="flat_green")
+        cprint(f"Branch swithced to {branch}", color="flat_green")
         branch = args.branch
     else:
         branch = "master"
