@@ -311,7 +311,7 @@ if __name__ == "__main__":
     ngrok            = ""
     
     if args.branch:
-        cprint("Branch swithced to" args.branch, color="flat_green")
+        cprint("Branch swithced to", args.branch, color="flat_green")
         branch = args.branch
     else
         branch = "master"
