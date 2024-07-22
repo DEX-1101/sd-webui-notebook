@@ -173,10 +173,10 @@ def parse_urls(filename):
             result[key].extend(urls)
     return result
 
-def get_filename(url, token=None):
-    headers = {}
-    if token:
-        headers['Authorization'] = 'Bearer hf_token'
+#def get_filename(url, token=None):
+#    headers = {}
+ #  if token:
+ #        headers['Authorization'] = 'Bearer hf_token'
        
 def custom_download(custom_dirs, user_header, api_key):
     for key, value in custom_dirs.items():
