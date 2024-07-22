@@ -204,7 +204,7 @@ def custom_download(custom_dirs, user_header, api_key):
                 elif key == "extensions":
                     clone_repo(url, cwd=dst)
                 else:
-                   download(url=url, filename=filename, user_header=user_header, dst=dst, quiet=False)
+                    download(url=url, filename=filename, user_header=user_header, dst=dst, quiet=False)
 
 def download_from_textfile(filename, custom_dirs, api_key):
     for key, urls in parse_urls(filename).items():
@@ -256,14 +256,14 @@ def download_file_with_aria2(url, save_dir='.'):
     else:
         cprint(f"    Download failed for: {url}", color="flat_red")
 
-#def download_from_link_file(link_file_path):
-#    with open(link_file_path, 'r') as file:
-    #    urls = file.readlines()
+def download_from_link_file(link_file_path):
+    with open(link_file_path, 'r') as file:
+        urls = file.readlines()
     
- #   for url in urls:
-   #     url = url.strip()
-  #      if url:  # Skip any blank lines
-  #          download_file_with_aria2(url)
+    for url in urls:
+        url = url.strip()
+        if url:  # Skip any blank lines
+            download_file_with_aria2(url)
 
 ############# TUNNELS #######################
 import cloudpickle as pickle
@@ -340,8 +340,8 @@ if __name__ == "__main__":
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
     # Download files listed in the link file
-    #download_from_link_file(link_file_path)
-    kontl(args.pastebin, args.hf_token, args.civitai_api)
+    download_from_link_file(link_file_path)
+    kontl(pastebin_url, hf_token, api_key)
 
     ############### UI ####################  
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
