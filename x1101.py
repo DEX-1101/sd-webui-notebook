@@ -295,7 +295,7 @@ if __name__ == "__main__":
     parser.add_argument("--civitai_api", type=str, help="Token.")
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
-    parser.add_argument("--branch", type=str, help="Switch different branch for webui. Default is 'master'.")
+    parser.add_argument("--branch", type=str, help="Switch different  for webui. Default is 'master'.")
     
     args = parser.parse_args()
 
@@ -354,13 +354,14 @@ if __name__ == "__main__":
     if args.ngrok_token:
         ngrok = f"--ngrok {ngrok_token}"
 
-    if args.branch:
-        branch = args.branch
-        cprint(f"Branch swithced to {branch}", color="flat_green")
-        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True)
+    if args.:
+         = args.
+        print_line(0)
+        cprint(f"[+]  swithced to {}", color="flat_green")
+        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
         branch = "master"
-        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True)
+        subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
     if args.pastebin:
         start_time    = time.time()
