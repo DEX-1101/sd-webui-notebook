@@ -357,7 +357,7 @@ if __name__ == "__main__":
     if args.branch:
         branch = args.branch
         print_line(0)
-        cprint(f"[+]  swithced to {}", color="flat_green")
+        cprint(f"[+]  swithced to {branch}", color="flat_green")
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
         branch = "master"
