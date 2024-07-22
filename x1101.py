@@ -220,7 +220,7 @@ def download_from_textfile(filename, custom_dir, api_key):
         else:
             cprint(f"Warning: Category '{key}' from the file is not found in custom_dirs.", color="flat_yellow")
             
-def custom_download_list(url):
+def custom_download_list(url, root_path, user_header):
     filename = "custom_download_list.txt"
     filepath = os.path.join(root_path, filename)
     if os.path.exists(filepath):
