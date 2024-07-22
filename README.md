@@ -17,7 +17,7 @@ List of all available args :
 --ngrok_token  : Token for tunneling with Ngrok (optional).
 --zrok_token   : Token for tunneling with Zrok (optional).
 --hub_token    : URL tha contains token for HUB extension for easily downloading stuff inside WebUI.
---branch       : Switch different branch for a111-webui. Default is 'master')
+--branch       : Switch different branch for a111-webui. Default is 'master'
 ```
 **Note** : To download model/lora or extension use ``--pastebin`` option, use [these](https://pastebin.com/XahpVjuT) format.
 
