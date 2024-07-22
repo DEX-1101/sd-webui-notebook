@@ -9,14 +9,15 @@
  Usage : `x1101.py` `--args1` `--args2`
 List of all available args :
 ```
---debug        : Enable debug mode, useful for diagnosing.
+--debug        : print all output.
 --req          : A file required for notebook to run.
 --config       : URL for WebUI config file if you want to import your config.
---pastebin     : Pastebin URL if you want to download model/lora/extensions/embeddings. Currently supported HF only.
+--pastebin     : Pastebin URL if you want to download model/lora/extensions/embeddings. Currently supported Huggingface's url only.
 --hf_token     : HuggingFace's Token if you download it from private repo for Pastebin download.
---ngrok_token  : Token for tunneling with ngrok.
---zrok_token   : Token for tunneling with Zrok. This is optional.
+--ngrok_token  : Token for tunneling with Ngrok (optional).
+--zrok_token   : Token for tunneling with Zrok (optional).
 --hub_token    : URL tha contains token for HUB extension for easily downloading stuff inside WebUI.
+--branch       : Switch different branch for a111-webui. Default is 'master')
 ```
 **Note** : To download model/lora or extension use ``--pastebin`` option, use [these](https://pastebin.com/XahpVjuT) format.
 
