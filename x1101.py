@@ -256,14 +256,14 @@ def download_file_with_aria2(url, save_dir='.'):
     else:
         cprint(f"    Download failed for: {url}", color="flat_red")
 
-def download_from_link_file(link_file_path):
-    with open(link_file_path, 'r') as file:
-        urls = file.readlines()
+#def download_from_link_file(link_file_path):
+#    with open(link_file_path, 'r') as file:
+    #    urls = file.readlines()
     
-    for url in urls:
-        url = url.strip()
-        if url:  # Skip any blank lines
-            download_file_with_aria2(url)
+ #   for url in urls:
+   #     url = url.strip()
+  #      if url:  # Skip any blank lines
+  #          download_file_with_aria2(url)
 
 ############# TUNNELS #######################
 import cloudpickle as pickle
@@ -340,7 +340,8 @@ if __name__ == "__main__":
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
     # Download files listed in the link file
-    download_from_link_file(link_file_path)
+    #download_from_link_file(link_file_path)
+    kontl(args.pastebin, args.hf_token, args.civitai_api)
 
     ############### UI ####################  
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
@@ -376,8 +377,8 @@ if __name__ == "__main__":
         branch = "master"
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
-    if args.pastebin:
-        kontl(args.pastebin, args.hf_token, args.civitai_api)
+    #if args.pastebin:
+      #  kontl(args.pastebin, args.hf_token, args.civitai_api)
 
         
     print_line(0)
