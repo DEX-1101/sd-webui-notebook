@@ -355,8 +355,8 @@ if __name__ == "__main__":
     if args.ngrok_token:
         ngrok = f"--ngrok {ngrok_token}"
 
-    if args.:
-         = args.
+    if args.branch:
+        branch = args.branch
         print_line(0)
         cprint(f"[+]  swithced to {}", color="flat_green")
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
