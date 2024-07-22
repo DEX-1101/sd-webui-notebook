@@ -1,7 +1,7 @@
 ## My Notebook Collection
 
 ## Notes
-  - Notebook works on both Colab (pro) and Kaggle. Although i don't use colab, so let me know if the is issue.
+  - Notebook works on both Colab (pro) and Kaggle. Although i don't use colab, so let me know if there is a issue.
 ## How to Start
  1. In the Kaggle, select `File` > `Import Notebook` > `GitHub` > type `DEX-1101/sd-webui-notebook` and choose the Notebook you want to use (*.ipynb extension)
  2. You need a `ngrok token`, get it from [here](https://dashboard.ngrok.com/get-started/your-authtoken). You need register it first.
