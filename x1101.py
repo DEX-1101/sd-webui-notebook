@@ -285,6 +285,18 @@ def get_public_ip(version='ipv4'):
 public_ipv4 = get_public_ip(version='ipv4')
 ############# TUNNELS #######################
 
+ def kontl(pastebin_url, hf_token, api_key):
+        start_time    = time.time()
+        textfile_path = download_list
+        custom_dirs = create_custom_dirs()
+        user_header = f"Authorization: Bearer {hf_token}"
+        if pastebin_url:
+            textfile_path = custom_download_list(pastebin_url, root_path, user_header)
+        download_from_textfile(textfile_path, custom_dirs, api_key)
+        custom_download(custom_dirs, user_header, api_key)
+        elapsed_time  = py_utils.calculate_elapsed_time(start_time)
+        
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ada indo coy !!!.")
     parser.add_argument("--req", type=str, help="Required file for notebook to run.")
@@ -365,17 +377,8 @@ if __name__ == "__main__":
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
     if args.pastebin:
-        start_time    = time.time()
-        textfile_path = download_list
-        custom_dirs = create_custom_dirs()
-        user_header = f"Authorization: Bearer {hf_token}"
-        if pastebin_url:
-            textfile_path = custom_download_list(pastebin_url, root_path, user_header)
-        download_from_textfile(custom_dirs, textfile_path, api_key)
-        custom_download(custom_dirs, user_header, api_key)
-        elapsed_time  = py_utils.calculate_elapsed_time(start_time)
-        
-        
+        kontl(args.pastebin_url, args.hf_token, args.civitai_api)
+
         
     print_line(0)
     cprint(f"[+] Starting WebUI...", color="flat_yellow")
