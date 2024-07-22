@@ -377,7 +377,7 @@ if __name__ == "__main__":
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
     if args.pastebin:
-        kontl(args.pastebin_url, args.hf_token, args.civitai_api)
+        kontl(args.pastebin, args.hf_token, args.civitai_api)
 
         
     print_line(0)
