@@ -96,8 +96,6 @@ else:
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-#ui = "/kaggle/working"
-
 def run_subprocesses(commands, show_output=False):
     processes = []
     for i, (command, message) in enumerate(commands):
@@ -235,7 +233,6 @@ def custom_download_list(url):
 def download_file_with_aria2(url, save_dir='.'):
     local_filename = os.path.join(save_dir, url.split('/')[-1])
 
-    # aria2c command
     command = [
         'aria2c',
         '--dir', save_dir,
@@ -245,10 +242,9 @@ def download_file_with_aria2(url, save_dir='.'):
         url
     ]
     
-    # Start the aria2c process
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     cprint(f"Downloading {url}", color="default")
-    process.wait()  # Ensure the process has completed
+    process.wait() 
     
     if process.returncode == 0:
         cprint(f"File saved as {local_filename}", color="red")
@@ -323,10 +319,9 @@ if __name__ == "__main__":
     subprocess_thread.join()
     progress_thread.join()
 
-    # Download the link file
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
-    # Download files listed in the link file
+    
     download_from_link_file(link_file_path)
 
     ############### UI ####################  
@@ -387,8 +382,10 @@ if __name__ == "__main__":
     
     with tunnel:
         #subprocess.run("python -m http.server 1101", shell=True)
-        #os.chdir(ui)
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
         lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
-        subprocess.run(lol, shell=True)       
-        subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
+        subprocess.run(lol, shell=True)
+        if args.debug:
+            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --precision full --no-half --use-cpu SD GFPGAN BSRGAN ESRGAN SCUNet CodeFormer --all --skip-torch-cuda-test --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle", shell=True)
+        else:
+            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
