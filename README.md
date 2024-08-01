@@ -4,7 +4,9 @@
   - Notebook works on both Colab (pro) and Kaggle. Although i don't use colab, so let me know if there is a issue.
 ## How to Start
  1. In the Kaggle, select `File` > `Import Notebook` > `GitHub` > type `DEX-1101/sd-webui-notebook` and choose the Notebook you want to use (*.ipynb extension)
- 2. You need a `ngrok token`, get it from [here](https://dashboard.ngrok.com/get-started/your-authtoken). You need register it first.
+ 2. For Colab :
+    
+    [![](https://img.shields.io/static/v1?message=Open%20in%20Colab&logo=googlecolab&labelColor=5c5c5c&color=0f80c1&label=%20&style=for-the-badge)](https://colab.research.google.com/github/DEX-1101/sd-webui-notebook/blob/main/kaggle-colab-notebook-(one-click).ipynb) 
 ## One-click Notebook
  Usage : `x1101.py` `--args1` `--args2`
 List of all available args :
