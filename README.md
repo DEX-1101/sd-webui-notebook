@@ -21,9 +21,9 @@ List of all available args :
 --hub_token    : URL tha contains token for HUB extension for easily downloading stuff inside WebUI.
 --branch       : Switch different branch for a111-webui. Default is 'master'
 ```
-**Note** : To download model/lora or extension use ``--pastebin`` option, use [these](https://pastebin.com/XahpVjuT) format.
+**Note** : To download model/lora or extension use ``--pastebin`` option, use [these](https://pastebin.com/XahpVjuT) format. Or you can use [HUB extensions](https://github.com/gutris1/sd-hub) inside webui.
 
-## How to use/register zrok tunnel
+## How to use/register zrok tunnel (optional)
   - Register [Here](https://colab.research.google.com/github/DEX-1101/sd-webui-notebook/blob/main/zrok_sign_up.ipynb). Just follow the instruction on it.
 
 ![sss](https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/main/img/Screenshot_13.png)
