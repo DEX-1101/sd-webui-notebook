@@ -38,7 +38,7 @@ def run_subprocesses_f():
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.25"
+        x_ver = "0.0.27"
         #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
@@ -96,7 +96,7 @@ else:
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
 
-ui = "/kaggle/working"
+#ui = "/kaggle/working"
 
 def run_subprocesses(commands, show_output=False):
     processes = []
