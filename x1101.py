@@ -38,7 +38,7 @@ def run_subprocesses_f():
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.25"
+        x_ver = "0.0.27"
         #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
@@ -50,7 +50,7 @@ def run_subprocesses_x():
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver}", shell=True)
         else:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done2 = True
 
 #####################
@@ -95,8 +95,6 @@ else:
 ################# UI #################
 ui_path = os.path.join(ui, "x1101")
 git_path = os.path.join(ui_path, "extensions")
-
-ui = "/kaggle/working"
 
 def run_subprocesses(commands, show_output=False):
     processes = []
@@ -146,13 +144,12 @@ class CustomDirs(BaseModel):
     url: str
     dst: str
 
-def create_custom_dirs():
-    return {
-        "model"       : CustomDirs(url=custom_model_url, dst=models_dir),
-        "vae"         : CustomDirs(url=custom_vae_url, dst=vaes_dir),
-        "embedding"   : CustomDirs(url=custom_embedding_url, dst=embeddings_dir),
-        "lora"        : CustomDirs(url=custom_LoRA_url, dst=lora_dir),
-        "extensions"  : CustomDirs(url=custom_extensions_url, dst=extensions_dir),
+custom_dirs = {
+    "model"       : CustomDirs(url=custom_model_url, dst=models_dir),
+    "vae"         : CustomDirs(url=custom_vae_url, dst=vaes_dir),
+    "embedding"   : CustomDirs(url=custom_embedding_url, dst=embeddings_dir),
+    "lora"        : CustomDirs(url=custom_LoRA_url, dst=lora_dir),
+    "extensions"  : CustomDirs(url=custom_extensions_url, dst=extensions_dir),
 }
 
 def parse_urls(filename):
@@ -173,10 +170,10 @@ def parse_urls(filename):
             result[key].extend(urls)
     return result
 
-#def get_filename(url, token=None):
-#    headers = {}
- #  if token:
- #        headers['Authorization'] = 'Bearer hf_token'
+def get_filename(url, token=None):
+    headers = {}
+    if token:
+        headers['Authorization'] = 'Bearer hf_token'
        
 def custom_download(custom_dirs, user_header, api_key):
     for key, value in custom_dirs.items():
@@ -204,9 +201,9 @@ def custom_download(custom_dirs, user_header, api_key):
                 elif key == "extensions":
                     clone_repo(url, cwd=dst)
                 else:
-                    download(url=url, filename=filename, user_header=user_header, dst=dst, quiet=False)
+                   download(url=url, filename=filename, user_header=user_header, dst=dst, quiet=False)
 
-def download_from_textfile(filename, custom_dirs, api_key):
+def download_from_textfile(filename, api_key):
     for key, urls in parse_urls(filename).items():
         for url in urls:
             if "civitai.com" in url:
@@ -220,7 +217,7 @@ def download_from_textfile(filename, custom_dirs, api_key):
         else:
             cprint(f"Warning: Category '{key}' from the file is not found in custom_dirs.", color="flat_yellow")
             
-def custom_download_list(url, root_path, user_header):
+def custom_download_list(url):
     filename = "custom_download_list.txt"
     filepath = os.path.join(root_path, filename)
     if os.path.exists(filepath):
@@ -236,7 +233,6 @@ def custom_download_list(url, root_path, user_header):
 def download_file_with_aria2(url, save_dir='.'):
     local_filename = os.path.join(save_dir, url.split('/')[-1])
 
-    # aria2c command
     command = [
         'aria2c',
         '--dir', save_dir,
@@ -246,10 +242,9 @@ def download_file_with_aria2(url, save_dir='.'):
         url
     ]
     
-    # Start the aria2c process
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     cprint(f"Downloading {url}", color="default")
-    process.wait()  # Ensure the process has completed
+    process.wait() 
     
     if process.returncode == 0:
         cprint(f"File saved as {local_filename}", color="red")
@@ -284,18 +279,6 @@ def get_public_ip(version='ipv4'):
 
 public_ipv4 = get_public_ip(version='ipv4')
 ############# TUNNELS #######################
-
-def kontl(pastebin_url, hf_token, api_key):
-    start_time    = time.time()
-    textfile_path = download_list
-    custom_dirs = create_custom_dirs()
-    user_header = f"Authorization: Bearer {hf_token}"
-    if pastebin_url:
-        textfile_path = custom_download_list(pastebin_url, root_path, user_header)
-    download_from_textfile(textfile_path, custom_dirs, api_key)
-    custom_download(custom_dirs, user_header, api_key)
-    elapsed_time  = py_utils.calculate_elapsed_time(start_time)
-        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ada indo coy !!!.")
@@ -336,12 +319,10 @@ if __name__ == "__main__":
     subprocess_thread.join()
     progress_thread.join()
 
-    # Download the link file
     download_file_with_aria2(args.req)
     link_file_path = os.path.join('.', args.req.split('/')[-1])
-    # Download files listed in the link file
+    
     download_from_link_file(link_file_path)
-    kontl(pastebin_url, hf_token, api_key)
 
     ############### UI ####################  
     result = subprocess.run(["python", "-m", "xformers.info"], capture_output=True, text=True)
@@ -371,15 +352,22 @@ if __name__ == "__main__":
     if args.branch:
         branch = args.branch
         print_line(0)
-        cprint(f"[+]  swithced to {branch}", color="flat_green")
+        cprint(f"[+] Branch swithced to {branch}", color="flat_green")
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
         branch = "master"
         subprocess.run(f"cd {ui_path} && git switch {branch} && git pull && git reset --hard", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     
-    #if args.pastebin:
-      #  kontl(args.pastebin, args.hf_token, args.civitai_api)
-
+    if args.pastebin:
+        start_time    = time.time()
+        textfile_path = download_list
+        if pastebin_url:
+            user_header = f"Authorization: Bearer {hf_token}"
+            textfile_path = custom_download_list(pastebin_url)
+        download_from_textfile(textfile_path, api_key)
+        custom_download(custom_dirs, user_header, api_key)
+        elapsed_time  = py_utils.calculate_elapsed_time(start_time)
+        
         
     print_line(0)
     cprint(f"[+] Starting WebUI...", color="flat_yellow")
@@ -394,8 +382,10 @@ if __name__ == "__main__":
     
     with tunnel:
         #subprocess.run("python -m http.server 1101", shell=True)
-        #os.chdir(ui)
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
         lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
-        subprocess.run(lol, shell=True)       
-        subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae", shell=True)
+        subprocess.run(lol, shell=True)
+        if args.debug:
+            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --precision full --no-half --use-cpu SD GFPGAN BSRGAN ESRGAN SCUNet CodeFormer --all --skip-torch-cuda-test --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-download-sd-model", shell=True)
+        else:
+            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae --no-download-sd-model", shell=True)
