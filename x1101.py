@@ -298,7 +298,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # variable
-    args.req = "https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/req.txt"
+    args.req         = "https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/req.txt"
     api_key          = args.civitai_api
     pastebin_url     = args.pastebin
     hf_token         = args.hf_token
@@ -307,7 +307,7 @@ if __name__ == "__main__":
     import_config    = args.config
     secret           = args.hub_token
     ngrok            = ""
-    args             = args.args
+    arguments        = args.args
 
     if args.debug:
         cprint("Debug mode enabled", color="red")
@@ -351,6 +351,9 @@ if __name__ == "__main__":
 
     if args.ngrok_token:
         ngrok = f"--ngrok {ngrok_token}"
+    
+    if args.args:
+        ui_args = f"{arguments}"
 
     if args.branch:
         branch = args.branch
@@ -391,4 +394,4 @@ if __name__ == "__main__":
         if args.debug:
             subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --precision full --no-half --use-cpu SD GFPGAN BSRGAN ESRGAN SCUNet CodeFormer --all --skip-torch-cuda-test --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-download-sd-model", shell=True)
         else:
-            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae --no-download-sd-model {args}", shell=True)
+            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae --no-download-sd-model {ui_args}", shell=True)
