@@ -31,7 +31,7 @@ def run_subprocesses_f():
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run("pip install colorama, wandb==0.15.8", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
     
