@@ -82,12 +82,10 @@ if 'COLAB_GPU' in os.environ:
     root_path = "/content"
     ui = "/content"
     env = 'Colab'
-    print("colab")
 elif 'KAGGLE_KERNEL_RUN_TYPE' in os.environ:
     root_path = "/kaggle/working"
     ui = "/kaggle/working"
     env = 'Kaggle'
-    print("kaggle")
 else:
      cprint('Error. Enviroment not detected', color="flat_red")
 
