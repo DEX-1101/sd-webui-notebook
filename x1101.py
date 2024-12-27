@@ -31,22 +31,20 @@ def run_subprocesses_f():
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run("pip install colorama", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run("pip install colorama wandb==0.15.8", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
     
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.27"
-        #cprint(f"Installing xformers {x_ver}...", color="red")
+        x_ver = "0.0.27.post2"
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
-            subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"pip install xformers=={x_ver}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     elif 'kaggle' in os.listdir('/') and not os.path.exists("x1101"):
         x_ver = "0.0.27"
-        #cprint(f"Installing xformers {x_ver}...", color="red")
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} torchvision==0.18.1 torchaudio==2.3.1 open-clip-torch==2.26.1", shell=True)
         else:
@@ -80,11 +78,11 @@ torch_ver = torch.__version__
 cuda_ver = torch.version.cuda
 gpu_status = f"{torch.cuda.get_device_name(torch.cuda.current_device())}" if torch.cuda.is_available() else "No GPU detected."
 
-if 'content' in os.listdir('/'):
+if 'COLAB_GPU' in os.environ:
     root_path = "/content"
     ui = "/content"
     env = 'Colab'
-elif 'kaggle' in os.listdir('/'):
+elif 'KAGGLE_KERNEL_RUN_TYPE' in os.environ:
     root_path = "/kaggle/working"
     ui = "/kaggle/working"
     env = 'Kaggle'
@@ -292,13 +290,11 @@ if __name__ == "__main__":
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
     parser.add_argument("--branch", type=str, help="Switch different  for webui. Default is 'master'.")
-    parser.add_argument("--args", type=str, help="Add your own webui's arguments'.")
-    
     
     args = parser.parse_args()
 
     # variable
-    args.req         = "https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/req.txt"
+    args.req = "https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/req.txt"
     api_key          = args.civitai_api
     pastebin_url     = args.pastebin
     hf_token         = args.hf_token
@@ -307,7 +303,6 @@ if __name__ == "__main__":
     import_config    = args.config
     secret           = args.hub_token
     ngrok            = ""
-    arguments        = args.args
 
     if args.debug:
         cprint("Debug mode enabled", color="red")
@@ -351,9 +346,6 @@ if __name__ == "__main__":
 
     if args.ngrok_token:
         ngrok = f"--ngrok {ngrok_token}"
-    
-    if args.args:
-        ui_args = f"{arguments}"
 
     if args.branch:
         branch = args.branch
@@ -394,4 +386,4 @@ if __name__ == "__main__":
         if args.debug:
             subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --precision full --no-half --use-cpu SD GFPGAN BSRGAN ESRGAN SCUNet CodeFormer --all --skip-torch-cuda-test --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-download-sd-model", shell=True)
         else:
-            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae --no-download-sd-model {ui_args}", shell=True)
+            subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass=x1101 --xformers --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-half-vae --no-download-sd-model", shell=True)
