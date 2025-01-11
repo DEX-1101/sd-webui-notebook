@@ -381,7 +381,7 @@ if __name__ == "__main__":
         subprocess.run(f"zrok enable {zrok_token}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         tunnel.add_tunnel(command="zrok share public http://localhost:{port}/ --headless", name="zrok", pattern=re.compile(r"[\w-]+\.share\.zrok\.io"))
     if args.cfid:
-        tunnel.add_tunnel(command=f"cloudflared service install {args.cfid}",name="cf custom",pattern=f"args.cfdomain")
+        tunnel.add_tunnel(command=f"/usr/bin/cloudflared --no-autoupdate tunnel run --token {args.cfid}",name="cf custom",pattern=re.compile(f"{args.cfdomain}"))
     with tunnel:
         #subprocess.run("python -m http.server 1101", shell=True)
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
