@@ -290,6 +290,8 @@ if __name__ == "__main__":
     parser.add_argument("--hub_token", type=str, help="Token for HUB extension for easily downloading stuff inside WebUI, do NOT put your token here but instead link file contains the token.")
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
     parser.add_argument("--branch", type=str, help="Switch different  for webui. Default is 'master'.")
+    parser.add_argument("--cfid", type=str, help="connector id of cloudflare tunnel.")
+    parser.add_argument("--cfdomain", type=str, help="custom domain of cf tunnel.")
     
     args = parser.parse_args()
 
@@ -378,7 +380,8 @@ if __name__ == "__main__":
     if args.zrok_token:
         subprocess.run(f"zrok enable {zrok_token}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         tunnel.add_tunnel(command="zrok share public http://localhost:{port}/ --headless", name="zrok", pattern=re.compile(r"[\w-]+\.share\.zrok\.io"))
-    
+    if args.cfid:
+        tunnel.add_tunnel(command=f"cloudflared service install {args.cfid}",name="cf custom",pattern=f"args.cfdomain")
     with tunnel:
         #subprocess.run("python -m http.server 1101", shell=True)
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
