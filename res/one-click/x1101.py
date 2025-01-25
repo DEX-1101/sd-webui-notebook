@@ -291,7 +291,6 @@ if __name__ == "__main__":
     parser.add_argument("--debug", action='store_true', help="Enable debug mode.")
     parser.add_argument("--branch", type=str, help="Switch different  for webui. Default is 'master'.")
     parser.add_argument("--cfid", type=str, help="connector id of cloudflare tunnel.")
-    parser.add_argument("--cfdomain", type=str, help="custom domain of cf tunnel.")
     parser.add_argument("--pswd", type=str, help="password.")
     
     args = parser.parse_args()
@@ -384,7 +383,7 @@ if __name__ == "__main__":
     if args.cfid:
         cprint(f"cl --no-autoupdate tunnel run --token {args.cfid}")
         cprint(f"{args.cfdomain}")
-        tunnel.add_tunnel(command=f"cl --no-autoupdate tunnel run --token {args.cfid}",name="cf custom",pattern=re.compile(f"{args.cfdomain}"))
+        tunnel.add_tunnel(command=f"cl --no-autoupdate tunnel run --token {args.cfid}",name="cf custom",pattern=re.compile(r"(?<=\\"hostname\\":\\")[\w-\.]+(?=\\")"))
     with tunnel:
         #subprocess.run("python -m http.server 1101", shell=True)
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
