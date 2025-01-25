@@ -382,7 +382,6 @@ if __name__ == "__main__":
         tunnel.add_tunnel(command="zrok share public http://localhost:{port}/ --headless", name="zrok", pattern=re.compile(r"[\w-]+\.share\.zrok\.io"))
     if args.cfid:
         cprint(f"cl --no-autoupdate tunnel run --token {args.cfid}")
-        cprint(f"{args.cfdomain}")
         tunnel.add_tunnel(command=f"cl --no-autoupdate tunnel run --token {args.cfid}",name="cf custom",pattern=re.compile(r'(?<=\\"hostname\\":\\")[\w-\.]+(?=\\")'))
     with tunnel:
         #subprocess.run("python -m http.server 1101", shell=True)
