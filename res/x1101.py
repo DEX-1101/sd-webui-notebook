@@ -4,14 +4,8 @@ import time
 import torch
 from colablib.colored_print import cprint, print_line
 
-if 'content' in os.listdir('/'):
-    ui = "/content"
-    env = 'Colab'
-elif 'kaggle' in os.listdir('/'):
-    ui = "/kaggle/working"
-    env = 'Kaggle'
-else:
-     cprint('Error. Enviroment not detected', color="flat_red")
+ui = "/kaggle/working"
+env = 'Kaggle'
     
 branch = "master"
 ui_path = os.path.join(ui, "x1101")
@@ -59,13 +53,7 @@ if __name__ == "__main__":
 
     agus = []
     
-    if 'content' in os.listdir('/'):
-        agus.append(("pip install xformers==0.0.25 --no-deps", "Installing xformers..."))
-    elif 'kaggle' in os.listdir('/'):
-        #agus.append(("pip install torch==2.1.2+cu121 torchvision==0.16.2+cu121 torchaudio==2.1.2 --extra-index-url https://download.pytorch.org/whl/cu121", "Installing torch..."))
-        agus.append(("pip install xformers==0.0.26.post1", "Installing xformers..."))
-    else:
-        agus.append((""))
+    agus.append(("pip install xformers==0.0.26.post1", "Installing xformers..."))
             
     si_kontol = 0
     kntl = 0

@@ -12,12 +12,7 @@ from colablib.colored_print import cprint, print_line
 from colablib.utils.config_utils import read_config
 from colablib.utils.git_utils import clone_repo
 
-if 'content' in os.listdir('/'):
-    root_path = "/content"
-elif 'kaggle' in os.listdir('/'):
-    root_path = "/kaggle/working"
-else:
-     cprint('Error. Enviroment not detected', color="flat_red")
+root_path = "/kaggle/working"
 
 webui_path = os.path.join(root_path, "x1101")
 
