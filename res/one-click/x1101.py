@@ -257,9 +257,7 @@ def download_from_link_file(link_file_path):
         url = url.strip()
         if url:  # Skip any blank lines
             download_file_with_aria2(url)
-
-############# TUNNELS #######################
-import cloudpickle as pickle
+            
 try:
     start_colab
 except:
@@ -368,15 +366,16 @@ if __name__ == "__main__":
         download_from_textfile(textfile_path, api_key)
         custom_download(custom_dirs, user_header, api_key)
         elapsed_time  = py_utils.calculate_elapsed_time(start_time)
-        
-        
+           
     print_line(0)
     cprint(f"[+] Starting WebUI...", color="flat_yellow")
-    tunnel_class = pickle.load(open("new_tunnel", "rb"), encoding="utf-8")
-    tunnel_port= 1101
-    tunnel = tunnel_class(tunnel_port)
+    subprocess.run(f"cd {ui} && run tunnel.py", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)    
+    
+    from tunnel import Tunnel
+    tunnel = Tunnel(1101)
     tunnel.add_tunnel(command="cl tunnel --url localhost:{port}", name="cl", pattern=re.compile(r"[\w-]+\.trycloudflare\.com"))
     tunnel.add_tunnel(command="lt --port {port}", name="lt", pattern=re.compile(r"[\w-]+\.loca\.lt"), note="Password : " + Fore.GREEN + public_ipv4 + Style.RESET_ALL + " rerun cell if 404 error.")
+    
     if args.zrok_token:
         subprocess.run(f"zrok enable {zrok_token}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         tunnel.add_tunnel(command="zrok share public http://localhost:{port}/ --headless", name="zrok", pattern=re.compile(r"[\w-]+\.share\.zrok\.io"))
