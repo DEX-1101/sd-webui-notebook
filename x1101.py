@@ -38,7 +38,7 @@ def run_subprocesses_f():
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.29.post3"
+        x_ver = "0.0.28.post3"
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
