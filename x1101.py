@@ -379,7 +379,7 @@ if __name__ == "__main__":
                 except OSError:
                     port += 1
                     
-    av_port = get_available_port(1101)
+    av_port = available_port(1101)
 ##########################################
 
 
