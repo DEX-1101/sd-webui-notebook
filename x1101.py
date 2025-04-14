@@ -31,7 +31,7 @@ def run_subprocesses_f():
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run("pip install colorama wandb==0.15.8", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run("pip install colorama wandb==0.19.9", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
     
@@ -257,9 +257,7 @@ def download_from_link_file(link_file_path):
         url = url.strip()
         if url:  # Skip any blank lines
             download_file_with_aria2(url)
-
-############# TUNNELS #######################
-import cloudpickle as pickle
+            
 try:
     start_colab
 except:
@@ -372,9 +370,11 @@ if __name__ == "__main__":
         
     print_line(0)
     cprint(f"[+] Starting WebUI...", color="flat_yellow")
-    tunnel_class = pickle.load(open("new_tunnel", "rb"), encoding="utf-8")
-    tunnel_port= 1101
-    tunnel = tunnel_class(tunnel_port)
+    subprocess.run("curl -s -OL https://raw.githubusercontent.com/cupang-afk/subprocess-tunnel/refs/heads/master/src/tunnel.py && run tunnel.py", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
+    #tunnel_class = pickle.load(open("new_tunnel", "rb"), encoding="utf-8")
+    #tunnel_port= 1101
+    #tunnel = tunnel_class(tunnel_port)
     tunnel.add_tunnel(command="cl tunnel --url localhost:{port}", name="cl", pattern=re.compile(r"[\w-]+\.trycloudflare\.com"))
     tunnel.add_tunnel(command="lt --port {port}", name="lt", pattern=re.compile(r"[\w-]+\.loca\.lt"), note="Password : " + Fore.GREEN + public_ipv4 + Style.RESET_ALL + " rerun cell if 404 error.")
     if args.zrok_token:
@@ -383,10 +383,10 @@ if __name__ == "__main__":
     if args.cfid:
         tunnel.add_tunnel(command=f"cl --no-autoupdate tunnel run --token {args.cfid}",name="cf custom",pattern=re.compile(r'(?<=\\"hostname\\":\\")[.\w-]+(?=\\")'))
     with tunnel:
-        #subprocess.run("python -m http.server 1101", shell=True)
-        subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
-        lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
-        subprocess.run(lol, shell=True)
+        subprocess.run("python -m http.server 1101", shell=True)
+        #subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
+        #lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
+        #subprocess.run(lol, shell=True)
         if args.debug:
             subprocess.run(f"cd {ui}/x1101 && python launch.py --port=1101 {ngrok} --api --encrypt-pass={args.pswd} --precision full --no-half --use-cpu SD GFPGAN BSRGAN ESRGAN SCUNet CodeFormer --all --skip-torch-cuda-test --theme dark --enable-insecure-extension-access --disable-console-progressbars --disable-safe-unpickle --no-download-sd-model", shell=True)
         else:
