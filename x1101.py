@@ -369,7 +369,7 @@ if __name__ == "__main__":
            
     print_line(0)
     cprint(f"[+] Starting WebUI...", color="flat_yellow")
-    subprocess.run("curl -s -OL https://raw.githubusercontent.com/cupang-afk/subprocess-tunnel/refs/heads/master/src/tunnel.py && run tunnel.py", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)    
+    subprocess.run(f"cd {ui} && run tunnel.py", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)    
     
     from tunnel import Tunnel
     tunnel = Tunnel(1101)
@@ -382,7 +382,7 @@ if __name__ == "__main__":
     if args.cfid:
         tunnel.add_tunnel(command=f"cl --no-autoupdate tunnel run --token {args.cfid}",name="cf custom",pattern=re.compile(r'(?<=\\"hostname\\":\\")[.\w-]+(?=\\")'))
     with tunnel:
-        subprocess.run("python -m http.server 1101", shell=True)
+        #subprocess.run("python -m http.server 1101", shell=True)
         subprocess.run(f"echo -n {start_colab} >{ui}/x1101/static/colabTimer.txt", shell=True)
         lol = f"sed -i -e \"s/\\[\\\"sd_model_checkpoint\\\"\\]/\\[\\\"sd_model_checkpoint\\\",\\\"sd_vae\\\",\\\"CLIP_stop_at_last_layers\\\"\\]/g\" {ui}/x1101/modules/shared_options.py"
         subprocess.run(lol, shell=True)
