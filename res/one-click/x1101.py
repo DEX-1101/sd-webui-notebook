@@ -31,14 +31,14 @@ def run_subprocesses_f():
     if not os.path.exists("x1101"):
         subprocess.run("pip install -q git+https://github.com/DEX-1101/colablib", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("apt -y install -qq aria2", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run("pip install colorama wandb==0.15.8", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run("pip install colorama wandb==0.19.9", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run("pip install trash-cli && trash-put /opt/conda/lib/python3.10/site-packages/aiohttp*", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     progress_done = True
     
 def run_subprocesses_x():
     global progress_done2
     if 'content' in os.listdir('/') and not os.path.exists("x1101"):
-        x_ver = "0.0.27.post2"
+        x_ver = "0.0.28.post3"
         if args.debug:
             subprocess.run(f"pip install xformers=={x_ver} --no-deps", shell=True)
         else:
