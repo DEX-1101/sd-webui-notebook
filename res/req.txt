@@ -1,2 +1,2 @@
-https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/new_tunnel
+https://raw.githubusercontent.com/cupang-afk/subprocess-tunnel/refs/heads/master/src/tunnel.py
 https://github.com/DEX-1101/SecretNAI/raw/main/download_list.txt
