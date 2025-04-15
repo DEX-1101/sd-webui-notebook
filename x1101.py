@@ -294,7 +294,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # variable
-    args.req = "https://github.com/DEX-1101/sd-webui-notebook/raw/main/res/req.txt"
+    args.req = "https://raw.githubusercontent.com/DEX-1101/sd-webui-notebook/refs/heads/dev/req.txt"
     api_key          = args.civitai_api
     pastebin_url     = args.pastebin
     hf_token         = args.hf_token
