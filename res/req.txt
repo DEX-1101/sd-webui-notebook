@@ -1,2 +1,2 @@
-https://raw.githubusercontent.com/cupang-afk/subprocess-tunnel/refs/heads/master/src/tunnel.py
+https://raw.githubusercontent.com/DEX-1101/subprocess-tunnel/refs/heads/master/src/tunnel.py
 https://github.com/DEX-1101/SecretNAI/raw/main/download_list.txt
